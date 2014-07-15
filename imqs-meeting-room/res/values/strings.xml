@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Meeting Room</string>
+    <string name="edit_message">Would you like to change this meeting?</string>
+    <string name="button_edit">Edit Meeting</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">Meeting Room</string>
+    <string name="title_activity_edit_meeting">EditMeeting</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_edit_room">EditRoomActivity</string>
+
+</resources>
