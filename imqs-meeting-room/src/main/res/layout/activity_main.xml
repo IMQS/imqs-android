@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    tools:context="co.za.imqs.meetingroom.MainActivity"
+    tools:context="za.co.imqs.meetingroom.MainActivity"
     tools:ignore="MergeRootFrame">
     
 	<fragment android:name="za.co.imqs.meetingroom.DetailFragment"
