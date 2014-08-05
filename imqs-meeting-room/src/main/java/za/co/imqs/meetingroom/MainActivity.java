@@ -1,20 +1,11 @@
 package za.co.imqs.meetingroom;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -25,43 +16,31 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+        View mainView = findViewById(R.id.activity_main);
+        if (mainView != null) {
+            if (savedInstanceState != null)
+                return;
+            AttendeesFragment a = new AttendeesFragment();
+            a.setArguments(getIntent().getExtras());
+            ((ViewGroup)mainView.getParent()).removeView(mainView);
+            getFragmentManager().beginTransaction().add(R.id.activity_main, a).commit();
+            //addFragments(new AttendeesFragment());
+        }
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
+    private <F extends Fragment> void addFragments(F... fragments) {
+        addFragments(R.id.activity_main, fragments);
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+    private <F extends Fragment> void addFragments(int container, F... fragments) {
+        FragmentTransaction tx = getFragmentManager().beginTransaction();
+        for (F f : fragments) {
+            f.setArguments(new Bundle());
+            tx.add(container, f);
+        }
+        tx.commit();
+    }
 
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-			
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
-
-		public PlaceholderFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_detail, container, false);
-			return rootView;
-		}
-	}
-	
 	/**
 	 * Added for tutorial - this method name is the value of the button's onClick property
 	 */

@@ -20,19 +20,16 @@ public class AttendeesFragment extends Fragment {
 
     ListView listView;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        LinearLayout fragmentAttendees = (LinearLayout) inflater.inflate(R.layout.fragment_attendees, container, false);
-        initialiseAttendeesList(fragmentAttendees);
-        return fragmentAttendees;
+    public AttendeesFragment() {
+        super();
     }
 
-	@Override
-	public void onCreate(Bundle bundle) {
-		super.onCreate(bundle);
-        final Activity parentActivity = this.getActivity();
-
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View result = inflater.inflate(R.layout.fragment_attendees, container, true);
+        initialiseAttendeesList(result);
+        return result;
+    }
 
     private void initialiseAttendeesList(View view) {
         listView = (ListView) view.findViewById(R.id.list_attendees);

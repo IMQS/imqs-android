@@ -1,17 +1,14 @@
 package za.co.imqs.meetingroom;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.ListFragment;
-import android.content.Intent;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.PopupWindow;
 
 /**
  * This indicates the details of a meeting
@@ -21,7 +18,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.fragment_detail, container, false);
+        View result = inflater.inflate(R.layout.fragment_detail, container, true);
         result.setBackgroundColor(Color.parseColor("#DFECF5"));
         result = initiateButtons(result);
         return result;
@@ -36,8 +33,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 	@Override
 	public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
-
 	}
 
     @Override
@@ -72,20 +67,16 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
      */
     public View onClickButtonEditDetail(View view) {
 
-        Activity parentActivity = this.getActivity();
-        LayoutInflater layoutInflater = (LayoutInflater) parentActivity.getBaseContext().getSystemService(parentActivity.LAYOUT_INFLATER_SERVICE);
-        View popupView = layoutInflater.inflate(R.layout.activity_edit_detail, null);
-        final PopupWindow popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        Button btnDismiss = (Button) popupView.findViewById(R.id.button_save_detail);
+        Activity parentActivity = (Activity)this.getActivity();
 
-        btnDismiss.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                popupWindow.dismiss();
-            }
-        });
+        FragmentTransaction transaction = parentActivity.getFragmentManager().beginTransaction();
+        Fragment newFragment = new EditDetailFragment();
+        transaction.hide(this);
+        // transaction.replace(R.id.detail, newFragment, "EditDetailsTag");
+        transaction.addToBackStack(null);
+        transaction.commit();
 
-        popupWindow.showAsDropDown(view.findViewById(R.id.button_edit_detail), 50, -30);
+
         return view;
     }
 }
