@@ -5,7 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
@@ -16,13 +17,15 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-        View mainView = findViewById(R.id.activity_main);
+        FrameLayout mainView = (FrameLayout) findViewById(R.id.activity_main);
         if (mainView != null) {
             if (savedInstanceState != null)
                 return;
+
+            View f = (View)findViewById(R.id.fragment_attendees);
+
             AttendeesFragment a = new AttendeesFragment();
             a.setArguments(getIntent().getExtras());
-            ((ViewGroup)mainView.getParent()).removeView(mainView);
             getFragmentManager().beginTransaction().add(R.id.activity_main, a).commit();
             //addFragments(new AttendeesFragment());
         }
