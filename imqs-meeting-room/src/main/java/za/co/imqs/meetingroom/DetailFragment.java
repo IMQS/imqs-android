@@ -18,7 +18,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.fragment_detail, container, true);
+        View result = inflater.inflate(R.layout.fragment_detail, container, false);
         result.setBackgroundColor(Color.parseColor("#DFECF5"));
         result = initiateButtons(result);
         return result;

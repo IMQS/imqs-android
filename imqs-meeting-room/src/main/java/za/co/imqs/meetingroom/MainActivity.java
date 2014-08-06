@@ -17,17 +17,11 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-        FrameLayout mainView = (FrameLayout) findViewById(R.id.activity_main);
+        LinearLayout mainView = (LinearLayout) findViewById(R.id.activity_main);
         if (mainView != null) {
             if (savedInstanceState != null)
                 return;
-
-            View f = (View)findViewById(R.id.fragment_attendees);
-
-            AttendeesFragment a = new AttendeesFragment();
-            a.setArguments(getIntent().getExtras());
-            getFragmentManager().beginTransaction().add(R.id.activity_main, a).commit();
-            //addFragments(new AttendeesFragment());
+            addFragments(new DetailFragment(), new AttendeesFragment());
         }
 	}
 

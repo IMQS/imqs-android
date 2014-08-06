@@ -26,8 +26,8 @@ public class AttendeesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.fragment_attendees, container, true);
-        //initialiseAttendeesList(result);
+        View result = inflater.inflate(R.layout.fragment_attendees, container, false);
+        initialiseAttendeesList(result);
         return result;
     }
 
