@@ -1,9 +1,8 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_detail"
-    android:layout_width="0dp"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal"
-    android:layout_weight="1">
+    android:orientation="horizontal">
 
     <TextView android:id="@+id/header_detail_view_text"
         android:hint="@string/header_detail_message"
@@ -17,7 +16,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_edit_detail"
-        android:layout_gravity="bottom|right"
-        />
+        android:layout_gravity="bottom|right" />
 
 </GridLayout>

@@ -6,9 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by donovan on 2014/07/20.
- */
 public class EditDetailFragment extends Fragment implements View.OnClickListener {
 
     @Override

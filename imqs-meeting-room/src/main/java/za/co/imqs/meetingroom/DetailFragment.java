@@ -72,7 +72,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         FragmentTransaction transaction = parentActivity.getFragmentManager().beginTransaction();
         Fragment newFragment = new EditDetailFragment();
         transaction.hide(this);
-        // transaction.replace(R.id.detail, newFragment, "EditDetailsTag");
+        transaction.replace(R.id.container_detail, newFragment, "EditDetailsTag");
         transaction.addToBackStack(null);
         transaction.commit();
 

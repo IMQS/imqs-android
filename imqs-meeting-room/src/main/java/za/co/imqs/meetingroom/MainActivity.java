@@ -5,8 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 public class MainActivity extends Activity {
 
@@ -15,19 +13,20 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
 
-        LinearLayout mainView = (LinearLayout) findViewById(R.id.activity_main);
-        if (mainView != null) {
+		setContentView(R.layout.fragment_container);
+
+        View fragmentContainer = findViewById(R.id.container_fragment);
+        View detailContainer = fragmentContainer.findViewById(R.id.container_detail);
+        View attendeesContainer = fragmentContainer.findViewById(R.id.container_attendees);
+
+        if (detailContainer != null && attendeesContainer != null) {
             if (savedInstanceState != null)
                 return;
-            addFragments(new DetailFragment(), new AttendeesFragment());
+            addFragments(detailContainer.getId(), new DetailFragment());
+            addFragments(attendeesContainer.getId(), new AttendeesFragment());
         }
 	}
-
-    private <F extends Fragment> void addFragments(F... fragments) {
-        addFragments(R.id.activity_main, fragments);
-    }
 
     private <F extends Fragment> void addFragments(int container, F... fragments) {
         FragmentTransaction tx = getFragmentManager().beginTransaction();
