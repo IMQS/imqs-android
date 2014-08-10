@@ -1,21 +1,68 @@
-<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_detail"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_detail_inner"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:stretchColumns="*">
 
-    <TextView android:id="@+id/header_detail_view_text"
-        android:hint="@string/header_detail_message"
-        android:text="@string/header_detail_message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Widget.ActionMode.Title" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/button_edit_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_edit_detail"
-        android:layout_gravity="bottom|right" />
 
-</GridLayout>
+        <TextView android:id="@+id/fragment_detail_header"
+            android:hint="@string/fragment_detail_header"
+            android:text="@string/fragment_detail_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:textSize="30sp"
+            android:singleLine="true"
+            android:gravity="center" />
+
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView android:id="@+id/fragment_detail_start_time_label"
+            android:text="@string/fragment_detail_start_time_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="25sp" />
+
+        <TextView android:id="@+id/fragment_detail_end_time_label"
+            android:text="@string/fragment_detail_end_time_label_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="25sp" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText android:id="@+id/fragment_detail_start_time"
+            android:hint="@string/fragment_detail_start_time_hint"
+            android:text="@string/fragment_detail_start_time_text"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:gravity="center"
+            android:textSize="55sp" />
+
+        <EditText android:id="@+id/fragment_detail_end_time"
+            android:hint="@string/fragment_detail_end_time_hint"
+            android:text="@string/fragment_detail_end_time_text"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:gravity="center"
+            android:textSize="55sp" />
+    </TableRow>
+
+</TableLayout>

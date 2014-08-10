@@ -6,9 +6,14 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.Date;
+
 public class MainActivity extends Activity {
 
 	public static String MESSAGE = "inter_activity_key";
+
+    Date startTime;
+    Date endTime;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
