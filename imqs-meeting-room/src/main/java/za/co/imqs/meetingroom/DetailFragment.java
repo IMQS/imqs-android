@@ -20,6 +20,7 @@ import android.widget.TimePicker;
 public class DetailFragment extends Fragment implements View.OnClickListener {
 
     Detail detail = null;
+    Activity parentActivity = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,8 +67,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.fragment_detail_start_time: onClickStartTime(view, detail);
-            case R.id.fragment_detail_end_time: onClickEndTime(view, detail);
+            case R.id.fragment_detail_start_time: { onClickStartTime(view, detail); return;}
+            case R.id.fragment_detail_end_time: { onClickEndTime(view, detail); return;}
         }
     }
 
@@ -76,7 +77,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
      * Opens the Start Time Dialog
      */
     public View onClickStartTime(final View view, final Detail detail) {
-        TimePickerDialog dialog = new TimePickerDialog(getActivity().getApplicationContext(), new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog dialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 detail.setStartTime(hour, minute);
@@ -92,7 +93,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
      * Opens the End Time Dialog
      */
     public View onClickEndTime(final View view, final Detail detail) {
-        TimePickerDialog dialog = new TimePickerDialog(getActivity().getApplicationContext(), new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog dialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 detail.setEndTime(hour, minute);

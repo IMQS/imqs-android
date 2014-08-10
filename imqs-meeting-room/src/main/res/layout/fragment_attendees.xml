@@ -7,7 +7,7 @@
          <ListView
              android:id="@+id/list_attendees"
              android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
+             android:layout_width="359dp"
          >
          </ListView>
  
