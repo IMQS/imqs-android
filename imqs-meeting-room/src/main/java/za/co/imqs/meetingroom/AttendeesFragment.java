@@ -12,6 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import za.co.imqs.meetingroom.util.AttendeeJsonReader;
+import za.co.imqs.meetingroom.util.AttendeeReaderInterface;
+
 /**
  * This indicates the details of who is in a meeting
  * @author donovan
@@ -27,13 +32,13 @@ public class AttendeesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_attendees, container, false);
-        initialiseAttendeesList(result);
+        initialiseAttendeesList(result, new AttendeeJsonReader());
         return result;
     }
 
-    private void initialiseAttendeesList(View view) {
+    private void initialiseAttendeesList(View view, AttendeeReaderInterface peopleReader) {
         listView = (ListView) view.findViewById(R.id.list_attendees);
-        String[] values = getListValues();
+        List<Attendee> people = peopleReader.getAttendees(this.getActivity());
 
         // Define a new Adapter
         // First parameter - Context
@@ -42,7 +47,7 @@ public class AttendeesFragment extends Fragment {
         // Forth - the Array of data
 
         final Activity parentActivity = this.getActivity();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(parentActivity, android.R.layout.simple_list_item_1, android.R.id.text1, values);
+        ArrayAdapter<Attendee> adapter = new AttendeesAdaptor(parentActivity, R.layout.row_attendee, people);
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,26 +57,15 @@ public class AttendeesFragment extends Fragment {
                 // ListView Clicked item index
                 int itemPosition = position;
                 // ListView Clicked item value
-                String itemValue = (String) listView.getItemAtPosition(position);
+                Attendee person = (Attendee) listView.getItemAtPosition(position);
                 // Show Alert
-                Toast.makeText(parentActivity.getApplicationContext(), "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG).show();
+                Toast.makeText(parentActivity.getApplicationContext(), "Position :" + itemPosition + "  Person : " + person.firstName, Toast.LENGTH_LONG).show();
             }
 
         });
 
     }
 
-    private String[] getListValues() {
-        return new String[]{
-                "Jaco Vosloo",
-                "Erick Underhill",
-                "Oliete Williams",
-                "Thea Bester",
-                "Rob Knight",
-                "Gerhard van Wyk"
-        };
-    }
-	
 	@Override
 	public void onPause() {
 		super.onPause();

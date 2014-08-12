@@ -1,0 +1,25 @@
+{
+    people: [
+        {f: "Renaldo", l: "September", p: ""},
+        {f: "Danielle", l: "Hendricks", p: ""},
+        {f: "Donovan", l: "Thatcher", p: ""},
+        {f: "Nontombi", l: "", p: ""},
+        {f: "Gerhard", l: "Venter", p: ""},
+        {f: "Frank", l: "van Riet", p: ""},
+        {f: "Ben", l: "Harper", p: ""},
+        {f: "Jaco", l: "Briers", p: ""},
+        {f: "Jeremy", l: "Walters", p: ""},
+        {f: "Armand", l: "van der Westhuisen", p: ""},
+        {f: "Angus", l: "Love", p: ""},
+        {f: "Skye", l: "", p: ""},
+        {f: "Nicolette", l: "", p: ""},
+        {f: "Ewald", l: "", p: ""},
+        {f: "Ryan", l: "", p: ""},
+        {f: "Jaco", l: "Vosloo", p: ""},
+        {f: "Cobus", l: "Kriege", p: ""},
+        {f: "Erick", l: "Underhill", p: ""},
+        {f: "Thea", l: "Bester", p: ""},
+        {f: "Carina", l: "", p: ""},
+        {f: "Rob", l: "Knight", p: ""}
+    ]
+}
