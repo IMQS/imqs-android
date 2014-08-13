@@ -3,6 +3,7 @@ package za.co.imqs.meetingroom;
 import android.app.Fragment;
 import android.content.ClipData;
 import android.os.Bundle;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,12 +73,28 @@ public class LobbyFragment extends Fragment implements AdapterView.OnItemLongCli
         Person person = (Person) listView.getItemAtPosition(position);
         ClipData data = ClipData.newPlainText("person", Integer.toString(person.id));
         View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-        view.setOnDragListener(new EnterFragmentListener(getMainActivity()));
+        view.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED: {
+                        mainActivity.displayEnterFragment();
+                        View dropzone = mainActivity.findViewById(R.id.container_meeting_room);
+                        dropzone.setOnDragListener(new EnterFragmentListener(mainActivity));
+                        return true;
+                    }
+                    case DragEvent.ACTION_DRAG_ENDED: {
+                        mainActivity.displayMeetingRoomFragment(); return true;
+                    }
+                }
+                return false;
+            }
+        });
         view.startDrag(data, shadowBuilder, null, 0);
     }
 
     public void refreshView(List<Person> people) {
-        ArrayAdapter<Person> adapter = new PeopleAdaptor(getActivity(), R.layout.row_attendee, people);
+        ArrayAdapter<Person> adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee, people);
         listView.setAdapter(adapter);
     }
 

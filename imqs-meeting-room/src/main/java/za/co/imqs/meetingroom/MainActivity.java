@@ -6,8 +6,6 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
-import java.util.List;
-
 import za.co.imqs.meetingroom.util.PeopleJsonReader;
 
 public class MainActivity extends Activity {
@@ -47,10 +45,10 @@ public class MainActivity extends Activity {
         lobby = getLobby();
         meetingRoom = getMeetingRoom();
 
-        meetingRoom.movePerson(lobby.getPeople().get(0), lobby.getPeople());
-        meetingRoom.movePerson(lobby.getPeople().get(0), lobby.getPeople());
-        meetingRoom.movePerson(lobby.getPeople().get(0), lobby.getPeople());
-        meetingRoom.movePerson(lobby.getPeople().get(0), lobby.getPeople());
+        meetingRoom.personExitTo(lobby.getPeople().get(0), meetingRoom);
+        meetingRoom.personExitTo(lobby.getPeople().get(0), meetingRoom);
+        meetingRoom.personExitTo(lobby.getPeople().get(0), meetingRoom);
+        meetingRoom.personExitTo(lobby.getPeople().get(0), meetingRoom);
     }
 
     private <F extends Fragment> void addFragments(int container, F... fragments) {

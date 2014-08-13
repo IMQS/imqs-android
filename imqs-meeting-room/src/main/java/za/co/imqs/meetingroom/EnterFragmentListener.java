@@ -20,20 +20,12 @@ public class EnterFragmentListener implements View.OnDragListener {
     @Override
     public boolean onDrag(View view, DragEvent dragEvent) {
         switch (dragEvent.getAction()) {
-            case DragEvent.ACTION_DRAG_STARTED: {
-                mainActivity.displayExitFragment();
-                return true;
-            }
             case DragEvent.ACTION_DROP: {
                 ClipData clipData = dragEvent.getClipData();
-                Person person = mainActivity.getPersonById(new Integer(clipData.getItemAt(0).toString()));
-                List<Person> meetingRoomPeople = mainActivity.getMeetingRoom().getPeople();
-                mainActivity.getMeetingRoom().movePerson(person, meetingRoomPeople);
-                mainActivity.getMeetingRoomFragment().refreshView(meetingRoomPeople);
-            }
-            case DragEvent.ACTION_DRAG_ENDED: {
-                mainActivity.displayDetailFragment();
-                return true;
+                Person person = mainActivity.getPersonById(new Integer(clipData.getItemAt(0).getText().toString()));
+                mainActivity.getMeetingRoom().personExitTo(person, mainActivity.getMeetingRoom());
+                mainActivity.getMeetingRoomFragment().refreshView(mainActivity.getMeetingRoom().getPeople());
+                mainActivity.getLobbyFragment().refreshView(mainActivity.getLobby().getPeople());
             }
         }
         return true;

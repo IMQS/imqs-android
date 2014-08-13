@@ -50,7 +50,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mainActivity.displayLobbyFragment();
-                mainActivity.displayEnterFragment();
             }
         });
         return button;

@@ -24,15 +24,9 @@ public class Room {
         this.people = people;
     }
 
-    public void movePerson(Person person, List<Person> outsidePeople) {
-        if (outsidePeople.contains(person)) {
-            this.people.add(person);
-            outsidePeople.remove(person);
-        }
-        else if (people.contains(person)) {
-            this.people.remove(person);
-            outsidePeople.add(person);
-        }
+    public void personExitTo(Person person, Room room) {
+        people.remove(person);
+        room.getPeople().add(person);
     }
 
     public List<Person> getPeople() {

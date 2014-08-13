@@ -3,6 +3,7 @@ package za.co.imqs.meetingroom;
 import android.app.Fragment;
 import android.content.ClipData;
 import android.os.Bundle;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,15 +23,11 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
     ListView listView = null;
     MainActivity mainActivity = null;
 
-    public MeetingRoomFragment() {
-        super();
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View result = inflater.inflate(R.layout.fragment_attendees, container, false);
         initialise(result);
+        mainActivity = (MainActivity)getActivity();
         return result;
     }
 
@@ -55,10 +52,33 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
     private void initiateDragPerson(View view, int position) {
         Person person = (Person) listView.getItemAtPosition(position);
         ClipData data = ClipData.newPlainText("person", Integer.toString(person.id));
+        View dropzpne = mainActivity.findViewById(R.id.fragment_enter);
         View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-        view.setOnDragListener(new ExitFragmentListener(getMainActivity()));
+        view.setOnDragListener(new View.OnDragListener() {
+            @Override
+            public boolean onDrag(View view, DragEvent dragEvent) {
+                switch (dragEvent.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED: {
+                        mainActivity.displayExitFragment();
+                        View dropzone = mainActivity.findViewById(R.id.container_detail);
+                        dropzone.setOnDragListener(new ExitFragmentListener(getMainActivity()));
+                        return true;
+                    }
+                    case DragEvent.ACTION_DRAG_ENDED: {
+                        mainActivity.displayDetailFragment();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
         view.startDrag(data, shadowBuilder, null, 0);
     }
+
+
+
+
+
 
     /**
      * Singleton Accessor
@@ -70,7 +90,7 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
     }
 
     public void refreshView(List<Person> people) {
-        ArrayAdapter<Person> adapter = new PeopleAdaptor(getActivity(), R.layout.row_attendee, people);
+        ArrayAdapter<Person> adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee, people);
         listView.setAdapter(adapter);
     }
 

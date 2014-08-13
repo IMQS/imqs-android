@@ -17,4 +17,9 @@ public class Person {
         this.lastName = lastName;
         this.avatarPath = avatarPath;
     }
+
+    @Override
+    public boolean equals(Object person) {
+        return person instanceof Person && ((Person)person).id == this.id;
+    }
 }

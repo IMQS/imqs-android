@@ -30,12 +30,9 @@ public class EnterFragment extends Fragment implements View.OnDragListener {
             case DragEvent.ACTION_DRAG_EXITED:
                 break;
             case DragEvent.ACTION_DROP:
-
                 View selectedView = (View) event.getLocalState();
                 view.setVisibility(View.VISIBLE);
-                ((MainActivity)getActivity()).displayDetailFragment();
                 break;
-
             case DragEvent.ACTION_DRAG_ENDED:
                 break;
             default:
