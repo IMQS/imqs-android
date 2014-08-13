@@ -1,38 +1,42 @@
 package za.co.imqs.meetingroom;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Holds info related to the details of a meeting
  * Created by donovan on 2014/08/10.
  */
-public class Detail {
+public class MeetingDetail {
 
     Calendar startTime;
     Calendar endTime;
     String description;
 
-    private static Detail detail = null;
+    private static List<Person> outsidePeople;
+    private static List<Person> insidePeople;
+
+    private static MeetingDetail meetingDetail = null;
 
     /**
      * Singleton implementation
      */
-    public static Detail getDetail() {
-        return detail == null ? createNewDetail() : detail;
+    public static MeetingDetail getMeetingDetail() {
+        return meetingDetail == null ? createNewDetail() : meetingDetail;
     }
 
     public void reset() {
-        detail = createNewDetail();
+        meetingDetail = createNewDetail();
     }
 
-    private static Detail createNewDetail() {
-        detail = new Detail();
-        detail.startTime = getTimeFromHourMinuteArray(null);
-        detail.endTime = getTimeFromHourMinuteArray(null);
-        detail.endTime.set(Calendar.MINUTE, 0);
-        detail.endTime.set(Calendar.HOUR, detail.startTime.get(Calendar.HOUR) + 1);
-        detail.setDescription("No Meeting Description Set");
-        return detail;
+    private static MeetingDetail createNewDetail() {
+        meetingDetail = new MeetingDetail();
+        meetingDetail.startTime = getTimeFromHourMinuteArray(null);
+        meetingDetail.endTime = getTimeFromHourMinuteArray(null);
+        meetingDetail.endTime.set(Calendar.MINUTE, 0);
+        meetingDetail.endTime.set(Calendar.HOUR, meetingDetail.startTime.get(Calendar.HOUR) + 1);
+        meetingDetail.setDescription("No Meeting Description Set");
+        return meetingDetail;
     }
 
     public void setStartTime(int hour, int min) {
@@ -73,4 +77,6 @@ public class Detail {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 }

@@ -13,7 +13,7 @@
         android:orientation="vertical">
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/container_attendees"
+        android:id="@+id/container_meeting_room"
         android:layout_width="0dp"
         android:layout_height="fill_parent"
         android:layout_weight="3"

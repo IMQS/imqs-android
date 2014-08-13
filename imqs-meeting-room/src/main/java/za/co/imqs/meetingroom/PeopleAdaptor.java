@@ -21,27 +21,27 @@ import java.util.List;
  *
  * Created by donovan on 2014/08/10.
  */
-public class AttendeesAdaptor extends ArrayAdapter<Attendee> {
+public class PeopleAdaptor extends ArrayAdapter<Person> {
 
-    HashMap<Attendee, Integer> attendeeToIdMap = new HashMap<Attendee, Integer>();
+    HashMap<Person, Integer> attendeeToIdMap = new HashMap<Person, Integer>();
     Context context = null;
-    List<Attendee> attendees;
+    List<Person> persons;
 
     /**
      * Constructor for creating an AttendeeAdaptor
      */
-    public AttendeesAdaptor(Context context, int viewResourceId, List<Attendee> attendees) {
-        super(context, viewResourceId, attendees);
+    public PeopleAdaptor(Context context, int viewResourceId, List<Person> persons) {
+        super(context, viewResourceId, persons);
         this.context = context;
-        for (int i = 0; i < attendees.size(); ++i)
-            attendeeToIdMap.put(attendees.get(i), i);
-        this.attendees = attendees;
+        for (int i = 0; i < persons.size(); ++i)
+            attendeeToIdMap.put(persons.get(i), i);
+        this.persons = persons;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Attendee attendee = attendees.get(position);
+        Person person = persons.get(position);
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.row_attendee, parent, false);
 
@@ -49,17 +49,17 @@ public class AttendeesAdaptor extends ArrayAdapter<Attendee> {
         imageView.setImageResource(R.drawable.ic_launcher); // TODO Find out how to reference the correct Id here
 
         TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
-        firstName.setText(attendee.firstName);
+        firstName.setText(person.firstName);
 
         TextView lastName = (TextView) rowView.findViewById(R.id.lastName);
-        lastName.setText(attendee.lastName);
+        lastName.setText(person.lastName);
 
         return rowView;
     }
 
     @Override
     public long getItemId(int position) {
-        Attendee item = getItem(position);
+        Person item = getItem(position);
         return attendeeToIdMap.get(item);
     }
 

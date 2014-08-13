@@ -1,17 +1,19 @@
 package za.co.imqs.meetingroom;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+
+import za.co.imqs.meetingroom.util.PeopleJsonReader;
+import za.co.imqs.meetingroom.util.PeopleReaderInterface;
 
 /**
  * This indicates the details of a meeting
@@ -19,14 +21,17 @@ import android.widget.TimePicker;
  */
 public class DetailFragment extends Fragment implements View.OnClickListener {
 
-    Detail detail = null;
-    Activity parentActivity = null;
+    MeetingDetail meetingDetail = null;
+    MainActivity mainActivity = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        meetingDetail = MeetingDetail.getMeetingDetail();
+        mainActivity = (MainActivity)getActivity();
+
         View result = inflater.inflate(R.layout.fragment_detail, container, false);
         result.setBackgroundColor(Color.parseColor("#DFECF5"));
-        detail = Detail.getDetail();
+
         result = initiateButtons(result);
         return result;
     }
@@ -36,7 +41,19 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         final View endTime = (View) view.findViewById(R.id.fragment_detail_end_time);
         startTime.setOnClickListener(this);
         endTime.setOnClickListener(this);
+        initialiseAddPeopleButton(view);
         return view;
+    }
+
+    public View initialiseAddPeopleButton(View view) {
+        final Button button = (Button) view.findViewById(R.id.add_people_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mainActivity.displayLobbyFragment();
+                mainActivity.displayEnterFragment();
+            }
+        });
+        return button;
     }
 
 	@Override
@@ -67,8 +84,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.fragment_detail_start_time: { onClickStartTime(view, detail); return;}
-            case R.id.fragment_detail_end_time: { onClickEndTime(view, detail); return;}
+            case R.id.fragment_detail_start_time: { onClickStartTime(view, meetingDetail); return;}
+            case R.id.fragment_detail_end_time: { onClickEndTime(view, meetingDetail); return;}
         }
     }
 
@@ -76,14 +93,14 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
      * TODO Refacrotr onClickStartTime() and onClickEndTime() to be DRY
      * Opens the Start Time Dialog
      */
-    public View onClickStartTime(final View view, final Detail detail) {
-        TimePickerDialog dialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+    public View onClickStartTime(final View view, final MeetingDetail meetingDetail) {
+        TimePickerDialog dialog = new TimePickerDialog(mainActivity, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                detail.setStartTime(hour, minute);
+                meetingDetail.setStartTime(hour, minute);
                 ((EditText)view).setText(hour + ":" + minute);
             }
-        }, this.detail.getStartTimeHour(), this.detail.getStartTimeMin(), true);
+        }, this.meetingDetail.getStartTimeHour(), this.meetingDetail.getStartTimeMin(), true);
         dialog.setTitle("Select Meeting Start Time");
         dialog.show();
         return view;
@@ -92,14 +109,14 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     /**
      * Opens the End Time Dialog
      */
-    public View onClickEndTime(final View view, final Detail detail) {
-        TimePickerDialog dialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
+    public View onClickEndTime(final View view, final MeetingDetail meetingDetail) {
+        TimePickerDialog dialog = new TimePickerDialog(mainActivity, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                detail.setEndTime(hour, minute);
+                meetingDetail.setEndTime(hour, minute);
                 ((EditText)view).setText( hour + ":" + minute);
             }
-        }, this.detail.getStartTimeHour(), this.detail.getStartTimeMin(), true);
+        }, this.meetingDetail.getStartTimeHour(), this.meetingDetail.getStartTimeMin(), true);
         dialog.setTitle("Select Meeting End Time");
         dialog.show();
         return view;
