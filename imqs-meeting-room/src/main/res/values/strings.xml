@@ -17,7 +17,11 @@
     <string name="fragment_detail_end_time_hint">Choose the time at which your meeting will end</string>
     <string name="fragment_detail_end_time_text">09:00</string>
     <string name="fragment_detail_button_text">Add People</string>
-    <string name="fragment_lobby_button_text">Finished</string>
+
+    <string name="fragment_meeting_room_list_empty">This meeting room is currently empty</string>
+
+    <string name="fragment_meeting_room_button_text">Add People</string>
+    <string name="fragment_lobby_button_text">Done</string>
 
 
     <string name="room_boardroom">Boardroom</string>

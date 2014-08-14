@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_enter"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -15,4 +15,11 @@
         android:layout_height="wrap_content"
     />
 
-</LinearLayout>
+    <ListView
+        android:id="@+id/meeting_room_people"
+        android:layout_height="wrap_content"
+        android:layout_width="205dp"
+        android:drawSelectorOnTop="false"
+        android:layout_gravity="center_horizontal" />
+
+</RelativeLayout>

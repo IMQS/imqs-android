@@ -2,12 +2,16 @@
     android:id="@+id/fragment_meeting_room"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:gravity="center_vertical|center_horizontal"
+    android:paddingTop="50dp"
+    android:paddingBottom="80dp">
 
     <ListView
         android:id="@+id/meeting_room_people"
         android:layout_height="wrap_content"
-        android:layout_width="359dp">
-    </ListView>
+        android:layout_width="205dp"
+        android:drawSelectorOnTop="false"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

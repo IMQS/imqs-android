@@ -10,6 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import za.co.imqs.meetingroom.util.PeopleJsonReader;
@@ -30,7 +33,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         mainActivity = (MainActivity)getActivity();
 
         View result = inflater.inflate(R.layout.fragment_detail, container, false);
-        result.setBackgroundColor(Color.parseColor("#DFECF5"));
+        result.setBackgroundColor(getResources().getColor(R.color.imqs_blue));
 
         result = initiateButtons(result);
         return result;
@@ -46,10 +49,11 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     }
 
     public View initialiseAddPeopleButton(View view) {
-        final Button button = (Button) view.findViewById(R.id.add_people_button);
+        final ImageView button = (ImageView) view.findViewById(R.id.add_people_button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mainActivity.displayLobbyFragment();
+                mainActivity.displayEnterFragment();
             }
         });
         return button;
@@ -97,7 +101,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 meetingDetail.setStartTime(hour, minute);
-                ((EditText)view).setText(hour + ":" + minute);
+                ((TextView)view).setText(hour + ":" + minute);
             }
         }, this.meetingDetail.getStartTimeHour(), this.meetingDetail.getStartTimeMin(), true);
         dialog.setTitle("Select Meeting Start Time");
@@ -113,7 +117,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 meetingDetail.setEndTime(hour, minute);
-                ((EditText)view).setText( hour + ":" + minute);
+                ((TextView)view).setText(hour + ":" + minute);
             }
         }, this.meetingDetail.getStartTimeHour(), this.meetingDetail.getStartTimeMin(), true);
         dialog.setTitle("Select Meeting End Time");

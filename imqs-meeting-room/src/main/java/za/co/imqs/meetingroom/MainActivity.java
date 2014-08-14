@@ -10,8 +10,6 @@ import za.co.imqs.meetingroom.util.PeopleJsonReader;
 
 public class MainActivity extends Activity {
 
-	public static String MESSAGE = "inter_activity_key";
-
     private static Room lobby = null;
     private static Room meetingRoom = null;
 
@@ -44,11 +42,6 @@ public class MainActivity extends Activity {
     public void initialiseRooms() {
         lobby = getLobby();
         meetingRoom = getMeetingRoom();
-
-        meetingRoom.personExitTo(lobby.getPeople().get(0), meetingRoom);
-        meetingRoom.personExitTo(lobby.getPeople().get(0), meetingRoom);
-        meetingRoom.personExitTo(lobby.getPeople().get(0), meetingRoom);
-        meetingRoom.personExitTo(lobby.getPeople().get(0), meetingRoom);
     }
 
     private <F extends Fragment> void addFragments(int container, F... fragments) {
@@ -152,22 +145,4 @@ public class MainActivity extends Activity {
                 return person;
         return null;
     }
-
-
-	/**
-	 * Added for tutorial - this method name is the value of the button's onClick property
-	 */
-	public void sendMessage(View view) {
-//		Intent intent = new Intent(this, EditMeetingActivity.class);
-//      TextView editText = (TextView) findViewById(R.id.header_detail);
-//		String msg = editText.getText().toString();
-//		intent.putExtra(MESSAGE, msg);
-//		startActivity(intent);
-	}
-
-    public void onClickEditDetail() {
-
-    }
-	
-
 }

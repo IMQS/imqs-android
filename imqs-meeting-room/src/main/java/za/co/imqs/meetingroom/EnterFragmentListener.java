@@ -23,7 +23,7 @@ public class EnterFragmentListener implements View.OnDragListener {
             case DragEvent.ACTION_DROP: {
                 ClipData clipData = dragEvent.getClipData();
                 Person person = mainActivity.getPersonById(new Integer(clipData.getItemAt(0).getText().toString()));
-                mainActivity.getMeetingRoom().personExitTo(person, mainActivity.getMeetingRoom());
+                mainActivity.getLobby().personExitTo(person, mainActivity.getMeetingRoom());
                 mainActivity.getMeetingRoomFragment().refreshView(mainActivity.getMeetingRoom().getPeople());
                 mainActivity.getLobbyFragment().refreshView(mainActivity.getLobby().getPeople());
             }

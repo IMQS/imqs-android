@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,7 +45,7 @@ public class LobbyFragment extends Fragment implements AdapterView.OnItemLongCli
 
     private void initialise(View view) {
         initialiseListView(view);
-        initialiseAddPeopleButton(view);
+        initialiseBackButton(view);
     }
 
     private void initialiseListView(View parentView) {
@@ -51,8 +53,8 @@ public class LobbyFragment extends Fragment implements AdapterView.OnItemLongCli
         listView.setOnItemLongClickListener(this);
     }
 
-    public View initialiseAddPeopleButton(View view) {
-        final Button button = (Button) view.findViewById(R.id.finished_add_people_button);
+    public View initialiseBackButton(View view) {
+        final ImageView button = (ImageView) view.findViewById(R.id.finished_add_people_button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 getMainActivity().displayDetailFragment();
@@ -94,7 +96,7 @@ public class LobbyFragment extends Fragment implements AdapterView.OnItemLongCli
     }
 
     public void refreshView(List<Person> people) {
-        ArrayAdapter<Person> adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee, people);
+        ArrayAdapter<Person> adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee_white, people);
         listView.setAdapter(adapter);
     }
 

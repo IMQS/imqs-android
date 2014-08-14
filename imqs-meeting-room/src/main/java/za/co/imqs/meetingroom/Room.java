@@ -26,7 +26,7 @@ public class Room {
 
     public void personExitTo(Person person, Room room) {
         people.remove(person);
-        room.getPeople().add(person);
+        if (!room.getPeople().contains(person)) {room.getPeople().add(person);};
     }
 
     public List<Person> getPeople() {

@@ -39,6 +39,7 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
 
     private void initialiseListView(View parentView) {
         listView = (ListView) parentView.findViewById(R.id.meeting_room_people);
+        listView.setEmptyView(getMainActivity().findViewById(R.id.room_empty));
         listView.setOnItemLongClickListener(this);
     }
 
@@ -51,7 +52,7 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
 
     private void initiateDragPerson(View view, int position) {
         Person person = (Person) listView.getItemAtPosition(position);
-        ClipData data = ClipData.newPlainText("person", Integer.toString(person.id));
+        ClipData data = ClipData.newPlainText("personId", Integer.toString(person.id));
         View dropzpne = mainActivity.findViewById(R.id.fragment_enter);
         View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
         view.setOnDragListener(new View.OnDragListener() {
@@ -65,7 +66,7 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
                         return true;
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {
-                        mainActivity.displayDetailFragment();
+                        mainActivity.displayLobbyFragment();
                         return true;
                     }
                 }
@@ -74,11 +75,6 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
         });
         view.startDrag(data, shadowBuilder, null, 0);
     }
-
-
-
-
-
 
     /**
      * Singleton Accessor
@@ -90,7 +86,7 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
     }
 
     public void refreshView(List<Person> people) {
-        ArrayAdapter<Person> adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee, people);
+        ArrayAdapter<Person> adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee_white, people);
         listView.setAdapter(adapter);
     }
 

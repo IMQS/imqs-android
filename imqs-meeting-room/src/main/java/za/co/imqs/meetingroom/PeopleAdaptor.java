@@ -43,7 +43,10 @@ public class PeopleAdaptor extends ArrayAdapter<Person> {
 
         Person person = persons.get(position);
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.row_attendee, parent, false);
+
+        int parentId = parent.getId();
+        int idToInflate = parentId == R.id.lobby_people ? R.layout.row_attendee_black : R.layout.row_attendee_white;
+        View rowView = inflater.inflate(idToInflate, parent, false);
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.avatar);
         imageView.setImageResource(R.drawable.ic_launcher); // TODO Find out how to reference the correct Id here
