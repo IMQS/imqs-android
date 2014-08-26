@@ -1,7 +1,7 @@
 package za.co.imqs.meetingroom;
 
 /**
- * POJO for representing a person who could attend a meetin
+ * POJO for representing a person who could attend a meeting
  * Created by donovan on 2014/08/10.
  */
 public class Person {
@@ -16,6 +16,10 @@ public class Person {
         this.firstName = firstName;
         this.lastName = lastName;
         this.avatarPath = avatarPath;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     @Override
