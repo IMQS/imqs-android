@@ -4,8 +4,6 @@ import android.content.ClipData;
 import android.view.DragEvent;
 import android.view.View;
 
-import java.util.List;
-
 /**
  * Created by donovan on 2014/08/13.
  */

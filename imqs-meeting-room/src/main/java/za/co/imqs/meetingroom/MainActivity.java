@@ -8,36 +8,45 @@ import android.view.View;
 
 import za.co.imqs.meetingroom.util.PeopleJsonReader;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity    {
 
-    private static Room lobby = null;
     private static Room meetingRoom = null;
+    private static Room lobby = null;
+
+
+
 
     public static DetailFragment detailFragment = null;
     public static MeetingRoomFragment meetingRoomFragment = null;
     public static ExitFragment exitFragment = null;
     public static EnterFragment enterFragment = null;
     public static LobbyFragment lobbyFragment = null;
+    public MainActivity mainActivity;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.fragment_container);
-
         View fragmentContainer = findViewById(R.id.container_fragment);
         View detailContainer = fragmentContainer.findViewById(R.id.container_detail);
         View meetingRoomContainer = fragmentContainer.findViewById(R.id.container_meeting_room);
+        View lobbyContainer = fragmentContainer.findViewById(R.id.container_lobby);
 
-        if (detailContainer != null && meetingRoomContainer != null) {
+        if (detailContainer != null && meetingRoomContainer != null && lobbyContainer != null ) {
             if (savedInstanceState != null)
                 return;
             addFragments(detailContainer.getId(), getDetailFragment());
             addFragments(meetingRoomContainer.getId(), getMeetingRoomFragment());
+             addFragments(lobbyContainer.getId(), getLobbyFragment());
+
         }
 
         initialiseRooms();
+
+
 	}
+
 
     public void initialiseRooms() {
         lobby = getLobby();
@@ -58,7 +67,7 @@ public class MainActivity extends Activity {
     }
 
     public void displayLobbyFragment() {
-        this.replaceFragment(R.id.container_detail, getLobbyFragment());
+        this.replaceFragment(R.id.container_lobby, getLobbyFragment());
     }
 
     public void displayEnterFragment() {
@@ -66,9 +75,12 @@ public class MainActivity extends Activity {
     }
 
     public void displayDetailFragment() {
+//        DetailFragment detailFragment1 = getDetailFragment();
+//        DetailFragment detailFragment2 = getDetailFragment();
+//        detailFragment1.refreshStartTime(parentView, meetingDetail);
+//        detailFragment2.refreshEndTime(parentView, meetingDetail);
         this.replaceFragment(R.id.container_detail, getDetailFragment());
     }
-
     public void displayMeetingRoomFragment() {
         this.replaceFragment(R.id.container_meeting_room, getMeetingRoomFragment());
     }
@@ -145,4 +157,6 @@ public class MainActivity extends Activity {
                 return person;
         return null;
     }
+
+
 }

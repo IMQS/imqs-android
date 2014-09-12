@@ -3,12 +3,9 @@
 
     <string name="app_name">Meeting Room</string>
     <string name="edit_message">Would you like to change this meeting?</string>
-
     <string name="button_edit_detail">Edit Details</string>
     <string name="button_save_detail">Save Details</string>
-
     <string name="action_settings">Settings</string>
-
     <string name="fragment_detail_header">Meeting</string>
     <string name="fragment_detail_start_time_label_text">Start</string>
     <string name="fragment_detail_start_time_hint">Choose the time at which your meeting will begin</string>
@@ -17,17 +14,31 @@
     <string name="fragment_detail_end_time_hint">Choose the time at which your meeting will end</string>
     <string name="fragment_detail_end_time_text">09:00</string>
     <string name="fragment_detail_button_text">Add People</string>
-
     <string name="fragment_meeting_room_list_empty">This meeting room is currently empty</string>
-
     <string name="fragment_meeting_room_button_text">Add People</string>
     <string name="fragment_lobby_button_text">Done</string>
-
-
     <string name="room_boardroom">Boardroom</string>
     <string name="room_chillroom">Chillroom</string>
     <string name="room_lobby">Lobby</string>
-
     <string name="title_activity_main">Meeting Room</string>
+    <string-array name="MeetingNames">
+        <item >Asset Management Team: Sprint Planning  </item>
+        <item>Asset Management Team: Sprint Review </item>
+        <item >Asset Management Team: Grooming</item>
+        <item >Asset Management Team: Retrospective</item>
+        <item >Infrastructure Team: Sprint Planning </item>
+        <item >Infrastructure Team: Sprint Review </item>
+        <item >Infrastructure Team: Grooming</item>
+        <item >Infrastructure Team: Retrospective</item>
+        <item >Analytics Team: Sprint Planning </item>A
+        <item >Analytics Team: Sprint Review</item>
+        <item >Analytics Team: Grooming</item>
+        <item >Analytics Team: Retrospective</item>
+        <item >PCS Team: Sprint Planning </item>
+        <item >PCS Team: Sprint Review </item>
+        <item >PCS Team: Grooming</item>
+        <item >PCS Team: Retrospective </item>
+    </string-array>
+
 
 </resources>

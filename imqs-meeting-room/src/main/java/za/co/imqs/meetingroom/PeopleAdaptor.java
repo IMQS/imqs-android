@@ -1,20 +1,16 @@
 package za.co.imqs.meetingroom;
 
 import android.content.Context;
-import android.graphics.LinearGradient;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SectionIndexer;
-import java.util.Collections;
 import android.widget.TextView;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
-import java.lang.*;
 
 /**
  * Preparing a row for the list
@@ -26,14 +22,12 @@ import java.lang.*;
  *
  * Created by donovan on 2014/08/10.
  */
-public class PeopleAdaptor extends ArrayAdapter  <Person> {
+public class PeopleAdaptor extends ArrayAdapter <Person> implements View.OnTouchListener {
 
     HashMap<Person, Integer> attendeeToIdMap = new HashMap<Person, Integer>();
     Context context = null;
     List<Person> persons;
-
-  //  private ArrayList<String> stringArray;
-
+    PersonDragInterface dragger = null;
 
 
 
@@ -57,48 +51,49 @@ public class PeopleAdaptor extends ArrayAdapter  <Person> {
         Person person = persons.get(position);
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-
-
         int parentId = parent.getId();
         int idToInflate = parentId == R.id.lobby_people ? R.layout.row_attendee_black : R.layout.row_attendee_white;
         View rowView = inflater.inflate(idToInflate, parent, false);
 
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.avatar);
-        imageView.setImageResource(R.drawable.ic_launcher); // TODO Find out how to reference the correct Id here
+            ImageView imageView = (ImageView) rowView.findViewById(R.id.avatar);
+            imageView.setImageResource(R.drawable.ic_launcher); // TODO Find out how to reference the correct Id here
 
+            TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
+            firstName.setText(person.firstName);
 
+            TextView lastName = (TextView) rowView.findViewById(R.id.lastName);
+            lastName.setText(person.lastName);
 
+        rowView.setTag(person);
+        rowView.setOnTouchListener(this);
 
+        return rowView;
+    }
 
-
-
-
-
-
-
-        TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
-        firstName.setText(person.firstName);
-
-       TextView lastName = (TextView) rowView.findViewById(R.id.lastName);
-        lastName.setText(person.lastName);
-
-   return rowView;
-
-
+    public  boolean onTouch(View rowView, MotionEvent motionEvent) {
+        switch(motionEvent.getAction()) {
+            case MotionEvent.ACTION_MOVE: {
+                dragger.initiateDragPerson(rowView, (Person) rowView.getTag());
+                break;
+            }
+        }
+        return true;
     }
 
     @Override
-    public long getItemId(int position) {
-        Person item = getItem(position);
-
-
-
-
-        return attendeeToIdMap.get(item);
-    }
+    public long getItemId(int position) {Person item = getItem(position);return attendeeToIdMap.get(item);}
 
     @Override
     public boolean hasStableIds() {
         return true;
     }
+
+    public PersonDragInterface getDragger() {
+        return dragger;
+    }
+
+    public void setDragger(PersonDragInterface dragger) {
+        this.dragger = dragger;
+    }
+
 }

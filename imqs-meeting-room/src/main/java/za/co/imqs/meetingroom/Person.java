@@ -11,12 +11,19 @@ public class Person {
     String lastName;
     String avatarPath;
 
+    private boolean isGroupheader = false;
+
+
+
     public Person(int id, String firstName, String lastName, String avatarPath) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.avatarPath = avatarPath;
+
     }
+
+
 
     public String getFirstName() {
         return firstName;
@@ -26,4 +33,6 @@ public class Person {
     public boolean equals(Object person) {
         return person instanceof Person && ((Person)person).id == this.id;
     }
+
+
 }
