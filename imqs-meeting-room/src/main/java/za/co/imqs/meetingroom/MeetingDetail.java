@@ -34,12 +34,13 @@ public class MeetingDetail {
         meetingDetail.startTime = getTimeFromHourMinuteArray(null);
         meetingDetail.endTime = getTimeFromHourMinuteArray(null);
         meetingDetail.endTime.set(Calendar.MINUTE, 0);
-        meetingDetail.endTime.set(Calendar.HOUR, meetingDetail.startTime.get(Calendar.HOUR) + 1);
+        meetingDetail.endTime.set(Calendar.HOUR_OF_DAY, meetingDetail.startTime.get(Calendar.HOUR_OF_DAY) + 1);
         meetingDetail.setDescription("No Meeting Description Set");
         return meetingDetail;
     }
 
     public void setStartTime(int hour, int min) {
+
         this.startTime = getTimeFromHourMinuteArray(new Integer[]{hour, min});
     }
     public void setEndTime(int hour, int min) {
@@ -47,13 +48,13 @@ public class MeetingDetail {
     }
 
     public int getStartTimeHour() {
-        return startTime.get(Calendar.HOUR);
+        return startTime.get(Calendar.HOUR_OF_DAY);
     }
     public int getStartTimeMin() {
         return startTime.get(Calendar.MINUTE);
     }
     public int getEndTimeHour() {
-        return endTime.get(Calendar.HOUR);
+        return endTime.get(Calendar.HOUR_OF_DAY);
     }
     public int getEndTimeMin() {
         return endTime.get(Calendar.MINUTE);

@@ -1,33 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fragment_lobby_inner"
-        android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/lobby_people"
-            android:layout_height="wrap_content"
-            android:layout_width="359dp">
-        </ListView>
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/fragment_lobby"
+    android:background="@color/imqs_blue"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:weightSum="1"
+        >
+        <TextView
+            android:layout_width="189dp"
+            android:layout_height="43dp"
+            android:layout_gravity="center"
+            android:textColor="@color/imqs_blue"
+            android:textSize="20dp"
+            android:text="Select Attendees"
+            android:layout_weight="0.89" />
     </LinearLayout>
+    <ListView
+        android:id="@+id/lobby_people"
+        android:layout_width="175dp"
+        android:layout_height="wrap_content"/>
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="@string/fragment_detail_button_text"
-        android:id="@+id/finished_add_people_button"
-        android:layout_alignBottom="@+id/fragment_lobby_inner"
-        android:focusable="true"
-        android:src="@drawable/tick"
-        android:layout_alignParentEnd="false"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/fragment_lobby_button_text"
-        android:layout_marginBottom="100dp" />
-
-</RelativeLayout>
+</LinearLayout>

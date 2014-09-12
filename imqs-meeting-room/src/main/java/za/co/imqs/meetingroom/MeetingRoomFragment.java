@@ -7,10 +7,7 @@ import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.GridView;
 
 import java.util.List;
 
@@ -18,9 +15,9 @@ import java.util.List;
  * This indicates the details of who is in a meeting
  * @author donovan
  */
-public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemLongClickListener {
+public class MeetingRoomFragment extends Fragment implements PersonDragInterface {
 
-    ListView listView = null;
+    GridView listView = null;
     MainActivity mainActivity = null;
 
     @Override
@@ -35,25 +32,17 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
         MainActivity mainActivity = ((MainActivity)getActivity());
         initialiseListView(view);
         refreshView(mainActivity.getMeetingRoom().getPeople());
+        //initialiseBackButton(view);
     }
 
     private void initialiseListView(View parentView) {
-        listView = (ListView) parentView.findViewById(R.id.meeting_room_people);
+        listView = (GridView) parentView.findViewById(R.id.meeting_room_people);
         listView.setEmptyView(getMainActivity().findViewById(R.id.room_empty));
-        listView.setOnItemLongClickListener(this);
+
     }
 
-    @Override
-    public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
-        Toast.makeText(getMainActivity().getApplicationContext(), "<-- Drag to Exit", Toast.LENGTH_LONG).show();
-        initiateDragPerson(view, position);
-        return true;
-    }
-
-    private void initiateDragPerson(View view, int position) {
-        Person person = (Person) listView.getItemAtPosition(position);
-        ClipData data = ClipData.newPlainText("personId", Integer.toString(person.id));
-        View dropzpne = mainActivity.findViewById(R.id.fragment_enter);
+    public void initiateDragPerson(View view, Person person) {
+        ClipData data = ClipData.newPlainText("person", Integer.toString(person.id));
         View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
         view.setOnDragListener(new View.OnDragListener() {
             @Override
@@ -62,7 +51,7 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
                     case DragEvent.ACTION_DRAG_STARTED: {
                         mainActivity.displayExitFragment();
                         View dropzone = mainActivity.findViewById(R.id.container_detail);
-                        dropzone.setOnDragListener(new ExitFragmentListener(getMainActivity()));
+                        dropzone.setOnDragListener(new ExitFragmentListener(mainActivity));
                         return true;
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {
@@ -85,8 +74,25 @@ public class MeetingRoomFragment extends Fragment implements AdapterView.OnItemL
         return mainActivity;
     }
 
+   //@Override
+//    public View initialiseBackButton(View view) {
+//        final ImageView button = (ImageView) view.findViewById(R.id.finished_add_people_button);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//               getMainActivity().displayDetailFragment();
+//                getMainActivity().displayMeetingRoomFragment();
+//                button.setVisibility(v.GONE);
+//
+//
+//
+//            }
+//        });
+//        return button;
+//    }
+
     public void refreshView(List<Person> people) {
-        ArrayAdapter<Person> adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee_white, people);
+        PeopleAdaptor adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee_white, people);
+        adapter.setDragger(this);
         listView.setAdapter(adapter);
     }
 
