@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,9 +25,29 @@ import java.util.List;
  */
 public class PeopleAdaptor extends ArrayAdapter <Person> implements View.OnTouchListener {
 
-    HashMap<Person, Integer> attendeeToIdMap = new HashMap<Person, Integer>();
-    Context context = null;
-    List<Person> persons;
+
+    // Array of integers points to images stored in /res/drawable-ldpi/
+    int[] flags = new int[]{
+            R.drawable.anguslove,
+            R.drawable.armad,
+            R.drawable.benharper,
+            R.drawable.danielle,
+            R.drawable.donny,
+            R.drawable.erickunderhill,
+            R.drawable.frank,
+            R.drawable.gerhand,
+            R.drawable.gustav,
+            R.drawable.jacobriers
+    };
+  List<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
+
+
+        HashMap<Person, Integer> attendeeToIdMap = new HashMap<Person, Integer>();
+        Context context = null;
+        List<Person> persons;
+
+
+
     PersonDragInterface dragger = null;
 
 
@@ -38,7 +59,8 @@ public class PeopleAdaptor extends ArrayAdapter <Person> implements View.OnTouch
         super(context, viewResourceId, persons);
         this.context = context;
         for (int i = 0; i < persons.size(); ++i)
-           attendeeToIdMap.put(persons.get(i), i);
+            attendeeToIdMap.put(persons.get(i), i);
+
 
 
 
@@ -55,8 +77,10 @@ public class PeopleAdaptor extends ArrayAdapter <Person> implements View.OnTouch
         int idToInflate = parentId == R.id.lobby_people ? R.layout.row_attendee_black : R.layout.row_attendee_white;
         View rowView = inflater.inflate(idToInflate, parent, false);
 
-            ImageView imageView = (ImageView) rowView.findViewById(R.id.avatar);
-            imageView.setImageResource(R.drawable.ic_launcher); // TODO Find out how to reference the correct Id here
+
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.avatar);
+        imageView.setImageResource(R.drawable.ic_launcher); // TODO Find out how to reference the correct Id here
+
 
             TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
             firstName.setText(person.firstName);

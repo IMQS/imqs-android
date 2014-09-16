@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 /**
  * This indicates the details of a meeting
  * @author donovan
@@ -71,7 +70,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
             refreshEndTime(view, meetingDetail);
         }
 
-       //initialiseAddPeopleButton(view);
        return view;
     }
 
@@ -88,17 +86,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         return endTime;
     }
 
-//    public View initialiseAddPeopleButton(View view) {
-//
-//        final ImageView button = (ImageView) view.findViewById(R.id.add_people_button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                mainActivity.displayLobbyFragment();
-//                mainActivity.displayEnterFragment();
-//            }
-//        });
-//        return button;
-//    }
+
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -147,8 +135,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
                 ((TextView)view).setText(new StringBuilder().append(pad(hour)).append(":").append(pad(minute)));
 
-                timePicker.setCurrentHour(hour);
-                timePicker.setCurrentMinute(minute);
+
                 meetingDetail.setStartTime(hour, minute);
 
 
@@ -169,11 +156,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
             public void onTimeSet(TimePicker timePicker, int hourOfDay, int selectedMinute) {
                 hour = hourOfDay;
                 minute = selectedMinute;
-
                 ((TextView)view).setText(new StringBuilder().append(pad(hour)).append(":").append(pad(minute)));
-
-                timePicker.setCurrentHour(hour);
-                timePicker.setCurrentMinute(minute);
                 meetingDetail.setEndTime(hour, minute);
 
             }

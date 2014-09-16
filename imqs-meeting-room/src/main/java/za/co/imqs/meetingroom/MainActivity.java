@@ -21,7 +21,6 @@ public class MainActivity extends Activity    {
     public static ExitFragment exitFragment = null;
     public static EnterFragment enterFragment = null;
     public static LobbyFragment lobbyFragment = null;
-    public MainActivity mainActivity;
 
 
 	@Override
@@ -33,20 +32,17 @@ public class MainActivity extends Activity    {
         View meetingRoomContainer = fragmentContainer.findViewById(R.id.container_meeting_room);
         View lobbyContainer = fragmentContainer.findViewById(R.id.container_lobby);
 
-        if (detailContainer != null && meetingRoomContainer != null && lobbyContainer != null ) {
+        if (detailContainer != null && meetingRoomContainer != null) {
             if (savedInstanceState != null)
                 return;
             addFragments(detailContainer.getId(), getDetailFragment());
             addFragments(meetingRoomContainer.getId(), getMeetingRoomFragment());
-             addFragments(lobbyContainer.getId(), getLobbyFragment());
-
+            addFragments(lobbyContainer.getId(), getLobbyFragment());
         }
 
         initialiseRooms();
 
-
 	}
-
 
     public void initialiseRooms() {
         lobby = getLobby();
@@ -75,12 +71,9 @@ public class MainActivity extends Activity    {
     }
 
     public void displayDetailFragment() {
-//        DetailFragment detailFragment1 = getDetailFragment();
-//        DetailFragment detailFragment2 = getDetailFragment();
-//        detailFragment1.refreshStartTime(parentView, meetingDetail);
-//        detailFragment2.refreshEndTime(parentView, meetingDetail);
         this.replaceFragment(R.id.container_detail, getDetailFragment());
     }
+
     public void displayMeetingRoomFragment() {
         this.replaceFragment(R.id.container_meeting_room, getMeetingRoomFragment());
     }

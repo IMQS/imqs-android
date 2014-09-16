@@ -28,6 +28,7 @@ public class Person {
     public String getFirstName() {
         return firstName;
     }
+    public String getAvatarPath(){ return avatarPath;}
 
     @Override
     public boolean equals(Object person) {

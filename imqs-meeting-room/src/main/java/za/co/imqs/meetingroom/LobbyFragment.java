@@ -19,22 +19,14 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
 
     ListView listView = null;
     private static MainActivity mainActivity = null;
-    LobbyFragment lobbyFragment = null;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         View result = inflater.inflate(R.layout.fragment_lobby, container, false);
         initialise(result);
         refreshView(getMainActivity().getLobby().getPeople());
-
         return result;
     }
-
-
-
     /**
      * Singleton Accessor
      */
@@ -67,7 +59,13 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
                         return true;
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {
-                        mainActivity.displayMeetingRoomFragment(); return true;
+
+                        if (dragEvent.getResult()) {
+                            mainActivity.displayMeetingRoomFragment();
+                            dragEvent.getResult();
+
+                            return true;
+                        }
                     }
                 }
                 return false;
