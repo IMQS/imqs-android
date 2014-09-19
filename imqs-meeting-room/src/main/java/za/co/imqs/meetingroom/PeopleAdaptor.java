@@ -1,6 +1,10 @@
 package za.co.imqs.meetingroom;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -9,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,33 +29,12 @@ import java.util.List;
  */
 public class PeopleAdaptor extends ArrayAdapter <Person> implements View.OnTouchListener {
 
-
-    // Array of integers points to images stored in /res/drawable-ldpi/
-    int[] flags = new int[]{
-            R.drawable.anguslove,
-            R.drawable.armad,
-            R.drawable.benharper,
-            R.drawable.danielle,
-            R.drawable.donny,
-            R.drawable.erickunderhill,
-            R.drawable.frank,
-            R.drawable.gerhand,
-            R.drawable.gustav,
-            R.drawable.jacobriers
-    };
-  List<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
-
-
         HashMap<Person, Integer> attendeeToIdMap = new HashMap<Person, Integer>();
         Context context = null;
         List<Person> persons;
-
-
+         ViewHolder holder;
 
     PersonDragInterface dragger = null;
-
-
-
     /**
      * Constructor for creating an AttendeeAdaptor
      */
@@ -59,40 +42,75 @@ public class PeopleAdaptor extends ArrayAdapter <Person> implements View.OnTouch
         super(context, viewResourceId, persons);
         this.context = context;
         for (int i = 0; i < persons.size(); ++i)
-            attendeeToIdMap.put(persons.get(i), i);
-
-
-
-
-        this.persons = persons;
+             attendeeToIdMap.put(persons.get(i), i);
+            this.persons = persons;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+
         Person person = persons.get(position);
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        int parentId = parent.getId();
-        int idToInflate = parentId == R.id.lobby_people ? R.layout.row_attendee_black : R.layout.row_attendee_white;
-        View rowView = inflater.inflate(idToInflate, parent, false);
+        if (convertView == null) {
+            int parentId = parent.getId();
+            int idToInflate = parentId == R.id.lobby_people ? R.layout.row_attendee_black : R.layout.row_attendee_white;
+            convertView = inflater.inflate(idToInflate, parent, false);
 
+            holder = new ViewHolder();
 
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.avatar);
-        imageView.setImageResource(R.drawable.ic_launcher); // TODO Find out how to reference the correct Id here
+            holder.imageView = (ImageView) convertView.findViewById(R.id.avatar);
+            holder.textView1 = (TextView) convertView.findViewById(R.id.firstName);
+            holder.textView2 = (TextView)convertView.findViewById(R.id.lastName);
 
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.imageView.setImageResource(R.drawable.ic_launcher);
+        new DownloadImageTask(holder.imageView).execute(person.getAvatPat());
+        holder.textView1.setText(person.getFirstName());
+        holder.textView2.setText(person.getLastName());
 
-            TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
-            firstName.setText(person.firstName);
+        return convertView;
 
-            TextView lastName = (TextView) rowView.findViewById(R.id.lastName);
-            lastName.setText(person.lastName);
-
-        rowView.setTag(person);
-        rowView.setOnTouchListener(this);
-
-        return rowView;
     }
+
+            static class ViewHolder {
+                public ImageView imageView;
+                public TextView textView1;
+                public TextView textView2;
+
+
+            }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+
+    }
+
 
     public  boolean onTouch(View rowView, MotionEvent motionEvent) {
         switch(motionEvent.getAction()) {

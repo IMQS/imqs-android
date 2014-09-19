@@ -13,6 +13,7 @@
         <AutoCompleteTextView
             android:id="@+id/autoNames"
             android:layout_width="400dp"
+            android:hint="Please Select Meeting"
             android:layout_height="wrap_content"/>
         <TableRow
             android:layout_width="match_parent"
@@ -54,6 +55,15 @@
                 android:gravity="center"
                 android:textSize="35sp"
                 android:textColor="#FFFFFFFF" />
+            <ImageView
+                android:id="@+id/EndMeeting"
+                android:src="@drawable/end_meeting"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:text="End Meeting"
+                android:scaleType="fitXY"
+                android:clickable="false" />
         </TableRow>
     </TableLayout>
 </RelativeLayout>

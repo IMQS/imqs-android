@@ -21,20 +21,6 @@
         android:numColumns="4"
         android:layout_alignParentStart="true"
         android:layout_toEndOf="@+id/fragment_meeting_room"></GridView>
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="@string/fragment_detail_button_text"
-        android:id="@+id/finished_add_people_button"
-        android:layout_alignBottom="@+id/fragment_meeting_room"
-        android:focusable="true"
-        android:src="@drawable/tick"
-        android:layout_alignParentRight="true"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/fragment_lobby_button_text"
-        android:layout_marginRight="5dp"
-        android:clickable="false"
-        android:visibility="visible"/>
 
 </RelativeLayout>
 

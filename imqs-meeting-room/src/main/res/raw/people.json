@@ -1,6 +1,6 @@
 {
     people: [
-        {i: 1, f: "Renaldo", l: "September", p: "R.drawable.renaldo"},
+        {i: 1, f: "Renaldo", l: "September", p: "\\imqsfile\F\Dev\Development\Meeting Room App\ContactPictures"},
         {i: 2, f: "Danielle", l: "Hendricks", p: "R.drawable.danielle"},
         {i: 3, f: "Donovan", l: "Thatcher", p: "R.drawable.donny"},
         {i: 4, f: "Nontombi", l: "Mbowane", p: "R.drawable.nonti"},

@@ -3,7 +3,7 @@ package za.co.imqs.meetingroom.util;
 import android.app.Activity;
 
 import java.util.List;
-import java.util.Collections;
+
 import za.co.imqs.meetingroom.Person;
 
 
@@ -14,5 +14,5 @@ import za.co.imqs.meetingroom.Person;
 public interface PeopleReaderInterface {
     List<Person> getPeople(Activity context);
 
-	
+
 }

@@ -60,12 +60,12 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {
 
-                        if (dragEvent.getResult()) {
+
                             mainActivity.displayMeetingRoomFragment();
-                            dragEvent.getResult();
+
 
                             return true;
-                        }
+
                     }
                 }
                 return false;
@@ -79,6 +79,8 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
         adapter.setDragger(this);
         listView.setAdapter(adapter);
     }
+
+
 
 
 }

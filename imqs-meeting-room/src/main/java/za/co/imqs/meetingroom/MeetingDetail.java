@@ -33,7 +33,10 @@ public class MeetingDetail {
         meetingDetail = new MeetingDetail();
         meetingDetail.startTime = getTimeFromHourMinuteArray(null);
         meetingDetail.endTime = getTimeFromHourMinuteArray(null);
-        meetingDetail.endTime.set(Calendar.MINUTE, 0);
+        meetingDetail.startTime.set(Calendar.HOUR_OF_DAY, 8);
+        meetingDetail.startTime.set(Calendar.MINUTE, 30);
+        meetingDetail.endTime.set(Calendar.HOUR_OF_DAY, 9);
+        meetingDetail.endTime.set(Calendar.MINUTE, 30);
         meetingDetail.endTime.set(Calendar.HOUR_OF_DAY, meetingDetail.startTime.get(Calendar.HOUR_OF_DAY) + 1);
         meetingDetail.setDescription("No Meeting Description Set");
         return meetingDetail;
@@ -63,11 +66,12 @@ public class MeetingDetail {
     private static Calendar getTimeFromHourMinuteArray(Integer[] hourMinute) {
         Calendar calendar = Calendar.getInstance();
         if (hourMinute != null) {
-            calendar.set(Calendar.HOUR, hourMinute[0]);
+            calendar.set(Calendar.HOUR_OF_DAY, hourMinute[0]);
             calendar.set(Calendar.MINUTE, hourMinute[1]);
         }
         return calendar;
     }
+
 
     /* --- Getters and Setters --- */
 

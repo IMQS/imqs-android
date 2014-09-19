@@ -3,17 +3,34 @@ package za.co.imqs.meetingroom;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
+import android.net.ParseException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.Toast;
 
-import za.co.imqs.meetingroom.util.PeopleJsonReader;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-public class MainActivity extends Activity    {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+
+//import za.co.imqs.meetingroom.util.PeopleJsonReader;
+
+public class MainActivity extends Activity {
 
     private static Room meetingRoom = null;
     private static Room lobby = null;
-
-
 
 
     public static DetailFragment detailFragment = null;
@@ -22,11 +39,17 @@ public class MainActivity extends Activity    {
     public static EnterFragment enterFragment = null;
     public static LobbyFragment lobbyFragment = null;
 
+    final Calendar c = Calendar.getInstance();
+    int  hour = c.get(Calendar.HOUR_OF_DAY);
+    int  minute = c.get(Calendar.MINUTE);
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_container);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_container);
+        new JSONAsyncTask().execute("http://microblogging.wingnity.com/JSONParsingTutorial/jsonActors");
+
         View fragmentContainer = findViewById(R.id.container_fragment);
         View detailContainer = fragmentContainer.findViewById(R.id.container_detail);
         View meetingRoomContainer = fragmentContainer.findViewById(R.id.container_meeting_room);
@@ -42,7 +65,7 @@ public class MainActivity extends Activity    {
 
         initialiseRooms();
 
-	}
+    }
 
     public void initialiseRooms() {
         lobby = getLobby();
@@ -91,7 +114,9 @@ public class MainActivity extends Activity    {
 
     public Room getLobby() {
         if (lobby == null)
-            lobby = new Room(getResources().getString(R.string.room_lobby), new PeopleJsonReader().getPeople(this));
+           //lobby = new Room(getResources().getString(R.string.room_lobby), new PeopleJsonReader().getPeople(this));
+           // lobby = new Room(getResources().getString(R.string.room_lobby), new JSONAsyncTask().execute("http://microblogging.wingnity.com/JSONParsingTutorial/jsonActors"));
+           lobby = new Room(getResources().getString(R.string.room_chillroom));
         return lobby;
     }
 
@@ -151,5 +176,78 @@ public class MainActivity extends Activity    {
         return null;
     }
 
+    class JSONAsyncTask extends AsyncTask<String, Void, Boolean> {
 
+        ProgressDialog dialog;
+        ArrayList<Person> persons;
+        PeopleAdaptor adapter;
+        ListView listview;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog = new ProgressDialog(MainActivity.this);
+            dialog.setMessage("Loading, please wait");
+            dialog.setTitle("Connecting server");
+            dialog.show();
+            dialog.setCancelable(false);
+        }
+
+        @Override
+        protected Boolean doInBackground(String... urls) {
+            try {
+
+                //------------------>>
+                HttpGet httppost = new HttpGet(urls[0]);
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpResponse response = httpclient.execute(httppost);
+
+                int status = response.getStatusLine().getStatusCode();
+
+                if (status == 200) {
+                    HttpEntity entity = response.getEntity();
+                    String data = EntityUtils.toString(entity);
+
+                    JSONObject jsono = new JSONObject(data);
+                    JSONArray attendees = jsono.getJSONArray("people");
+
+                    for (int i = 0; i < attendees.length(); i++) {
+                        JSONObject object = attendees.getJSONObject(i);
+
+                        Person people = new Person();
+
+                        people.setFirstName(object.getString("firstName"));
+                        people.setLastName(object.getString("lastName"));
+                        people.setAvatarPath(object.getString("avatarPath"));
+
+                        persons.add(people);
+
+                    }
+                    return true;
+                }
+
+                //------------------>>
+
+            } catch (ParseException e1) {
+                e1.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return false;
+        }
+        @Override
+        protected void onPostExecute(Boolean result) {
+
+            listview = (ListView) findViewById(R.id.lobby_people);
+            listview.setAdapter(adapter);
+            dialog.dismiss();
+            if(result == false)
+            Toast.makeText(getApplicationContext(), "Unable to fetch data from server", Toast.LENGTH_LONG).show();
+
+        }
+
+
+    }
 }

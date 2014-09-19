@@ -55,7 +55,7 @@
                     android:layout_weight="1"
                     android:orientation="horizontal"
                     android:background="@drawable/abc_list_focused_holo"
-                    android:layout_height="350dp"
+                    android:layout_height="520dp"
                     android:layout_margin="5dip"/>
                     <LinearLayout/>
 

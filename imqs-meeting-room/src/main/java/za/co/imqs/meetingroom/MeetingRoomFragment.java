@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
         MainActivity mainActivity = ((MainActivity)getActivity());
         initialiseListView(view);
         refreshView(mainActivity.getMeetingRoom().getPeople());
-        initialiseBackButton(view);
+        //initialiseBackButton(view);
     }
 
     private void initialiseListView(View parentView) {
@@ -57,6 +56,7 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {
                         mainActivity.displayLobbyFragment();
+                       // mainActivity.displayMeetingRoomFragment();
                         return true;
                     }
                 }
@@ -76,17 +76,6 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
     }
 
 
-    public View initialiseBackButton(View view) {
-        final ImageView button = (ImageView) view.findViewById(R.id.finished_add_people_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-               getMainActivity().displayDetailFragment();
-               getMainActivity().displayMeetingRoomFragment();
-               button.setVisibility(v.GONE);
-            }
-        });
-        return button;
-    }
 
     public void refreshView(List<Person> people) {
         PeopleAdaptor adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee_white, people);

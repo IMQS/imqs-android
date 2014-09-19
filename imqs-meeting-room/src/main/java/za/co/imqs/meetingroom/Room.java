@@ -3,9 +3,6 @@ package za.co.imqs.meetingroom;
 import java.util.ArrayList;
 import java.util.List;
 
-import za.co.imqs.meetingroom.MeetingDetail;
-import za.co.imqs.meetingroom.Person;
-
 /**
  * Represent a meeting meetingRoom
  * Created by donovan on 2014/08/12.
