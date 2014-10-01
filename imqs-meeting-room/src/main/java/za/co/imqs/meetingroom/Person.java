@@ -12,30 +12,23 @@ public class Person {
     String avatarPath;
 
     private boolean isGroupheader = false;
-     public Person(){
 
-     }
 
 
     public Person(int id, String firstName, String lastName, String avatarPath) {
+        super();
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.avatarPath = avatarPath;
-
     }
-
-
 
     public String getFirstName() {
         return firstName;
     }
-    public void setFirstName(String firstName){this.firstName =firstName;}
-    public String getLastName(){return lastName;}
-    public void setLastName(String lastName){this.lastName = lastName;}
-    public String getAvatPat(){ return avatarPath;}
-    public void setAvatarPath(String avatarPath){this.avatarPath =avatarPath;}
-
+    public String getLastName() {
+        return lastName;
+    }
 
     @Override
     public boolean equals(Object person) {

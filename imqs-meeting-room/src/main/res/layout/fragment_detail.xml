@@ -55,15 +55,16 @@
                 android:gravity="center"
                 android:textSize="35sp"
                 android:textColor="#FFFFFFFF" />
-            <ImageView
-                android:id="@+id/EndMeeting"
-                android:src="@drawable/end_meeting"
-                android:layout_width="fill_parent"
+            <Button
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:focusable="true"
                 android:text="End Meeting"
-                android:scaleType="fitXY"
-                android:clickable="false" />
+                android:id="@+id/EndMeeting"
+                android:textColor="#FFFFFFFF"
+                android:layout_column="2" />
         </TableRow>
+
+
+
     </TableLayout>
 </RelativeLayout>

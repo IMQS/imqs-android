@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 /**
@@ -97,7 +97,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
 
     public View EndMeting(View view) {
-        final ImageView button = (ImageView) view.findViewById(R.id.EndMeeting);
+        final Button button = (Button) view.findViewById(R.id.EndMeeting);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 listView = null;

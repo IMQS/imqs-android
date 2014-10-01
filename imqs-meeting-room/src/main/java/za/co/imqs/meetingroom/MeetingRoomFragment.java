@@ -32,7 +32,7 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
         MainActivity mainActivity = ((MainActivity)getActivity());
         initialiseListView(view);
         refreshView(mainActivity.getMeetingRoom().getPeople());
-        //initialiseBackButton(view);
+
     }
 
     private void initialiseListView(View parentView) {
@@ -56,7 +56,7 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {
                         mainActivity.displayLobbyFragment();
-                       // mainActivity.displayMeetingRoomFragment();
+
                         return true;
                     }
                 }
@@ -72,6 +72,7 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
     private MainActivity getMainActivity() {
         if (mainActivity == null)
             mainActivity = (MainActivity)getActivity();
+
         return mainActivity;
     }
 

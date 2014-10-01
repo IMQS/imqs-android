@@ -8,9 +8,9 @@ import za.co.imqs.meetingroom.Person;
 
 
 /**
- * Abstract all the Attendee reading stuff
- * Created by donovan on 2014/08/12.
- */
+* Abstract all the Attendee reading stuff
+* Created by donovan on 2014/08/12.
+*/
 public interface PeopleReaderInterface {
     List<Person> getPeople(Activity context);
 
