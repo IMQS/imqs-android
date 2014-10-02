@@ -8,6 +8,4 @@ import android.view.View;
 */
 public interface PersonDragInterface {
     public void initiateDragPerson(View rowView, Person personToDrag);
-
-
 }

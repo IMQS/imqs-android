@@ -27,10 +27,13 @@ public class EnterFragmentListener implements View.OnDragListener {
                 mainActivity.getMeetingRoomFragment().refreshView(mainActivity.getMeetingRoom().getPeople());
                 mainActivity.getLobbyFragment().refreshView(mainActivity.getLobby().getPeople());
 
-
             }
 
         }
         return true;
     }
+
+
+
+
 }

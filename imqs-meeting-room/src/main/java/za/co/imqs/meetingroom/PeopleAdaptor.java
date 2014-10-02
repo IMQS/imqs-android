@@ -53,11 +53,11 @@ public class PeopleAdaptor extends ArrayAdapter<Person> implements View.OnTouchL
         int avatarId = context.getResources().getIdentifier(person.avatarPath, "drawable", context.getPackageName());
         imageView.setImageResource(avatarId);
 
-        TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
+       TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
         firstName.setText(person.firstName);
 
         TextView lastName = (TextView) rowView.findViewById(R.id.lastName);
-        lastName.setText(person.lastName);
+       lastName.setText(person.lastName);
 
 
         rowView.setTag(person);
@@ -66,6 +66,8 @@ public class PeopleAdaptor extends ArrayAdapter<Person> implements View.OnTouchL
 
         return rowView;
     }
+
+
 
     public  boolean onTouch(View rowView, MotionEvent motionEvent) {
         switch(motionEvent.getAction()) {

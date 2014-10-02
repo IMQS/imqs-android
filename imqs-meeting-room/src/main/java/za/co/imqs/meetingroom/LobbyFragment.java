@@ -7,7 +7,6 @@ import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.util.List;
@@ -20,7 +19,7 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
 
     ListView listView = null;
     private static MainActivity mainActivity = null;
-    ImageView image = null;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,6 +49,12 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
 
     private void initialiseListView(View parentView) {
         listView = (ListView) parentView.findViewById(R.id.lobby_people);
+        listView.setFastScrollAlwaysVisible(true);
+        listView.setFastScrollEnabled(true);
+
+
+
+
 
     }
 
@@ -65,10 +70,12 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
                         mainActivity.displayEnterFragment();
                         View dropzone = mainActivity.findViewById(R.id.container_meeting_room);
                         dropzone.setOnDragListener(new EnterFragmentListener(mainActivity));
+
                         return true;
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {
                             mainActivity.displayMeetingRoomFragment();
+                            mainActivity.displayLobbyFragment();
                             return true;
                     }
                 }
@@ -79,12 +86,11 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
     }
 
 
-
-
     public void refreshView(List<Person> people) {
         PeopleAdaptor adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee_white, people);
         adapter.setDragger(this);
         listView.setAdapter(adapter);
+
     }
 
 

@@ -26,6 +26,13 @@
                 android:gravity="center"
                 android:textSize="25sp"
                 android:textColor="#ffffffff" />
+            <TextView android:id="@+id/Test"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="#ffffffff" />
             <TextView android:id="@+id/fragment_detail_end_time_label"
                 android:text="@string/fragment_detail_end_time_label_text"
                 android:layout_width="wrap_content"
@@ -40,6 +47,16 @@
             <TextView android:id="@+id/fragment_detail_start_time"
                 android:hint="@string/fragment_detail_start_time_hint"
                 android:text="@string/fragment_detail_start_time_text"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:gravity="center"
+                android:textSize="35sp"
+                android:textColor="#FFFFFFFF" />
+
+            <TextView android:id="@+id/to"
+                android:hint="@string/fragment_detail_start_time_hint"
+                android:text="to"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"

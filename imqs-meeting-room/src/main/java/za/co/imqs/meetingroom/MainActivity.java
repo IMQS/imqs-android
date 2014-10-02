@@ -43,6 +43,7 @@ public class MainActivity extends Activity    {
             addFragments(meetingRoomContainer.getId(), getMeetingRoomFragment());
             addFragments(lobbyContainer.getId(), getLobbyFragment());
 
+
         }
 
         initialiseRooms();
@@ -133,7 +134,9 @@ public class MainActivity extends Activity    {
     public EnterFragment getEnterFragment() {
         if (enterFragment == null)
             enterFragment = new EnterFragment();
-        return enterFragment;
+
+        return   enterFragment;
+
     }
 
     public Person getPersonById(int id) {

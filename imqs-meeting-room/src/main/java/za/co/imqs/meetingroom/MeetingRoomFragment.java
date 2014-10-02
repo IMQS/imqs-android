@@ -7,6 +7,7 @@ import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
         View result = inflater.inflate(R.layout.fragment_attendees, container, false);
         initialise(result);
         mainActivity = (MainActivity)getActivity();
+
+
         return result;
     }
 
@@ -39,6 +42,17 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
         listView = (GridView) parentView.findViewById(R.id.meeting_room_people);
         listView.setEmptyView(getMainActivity().findViewById(R.id.room_empty));
 
+    }
+    public View EndMeting(View view) {
+        final Button button = (Button) view.findViewById(R.id.EndMeeting);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                listView.setVisibility(View.GONE);
+
+            }
+        });
+        return button;
     }
 
     public void initiateDragPerson(View view, Person person) {
@@ -56,6 +70,7 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {
                         mainActivity.displayLobbyFragment();
+                        mainActivity.displayDetailFragment();
 
                         return true;
                     }

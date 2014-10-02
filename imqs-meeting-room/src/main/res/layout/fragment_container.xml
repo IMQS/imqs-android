@@ -1,65 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:id="@+id/container_fragment"
     android:layout_height="fill_parent">
-    <TableRow android:layout_width="0dip"
-        android:layout_weight="2"
-        android:layout_height="0dip">
+    <LinearLayout
+        android:id="@+id/container_lobby"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_gravity="top|bottom"
+        android:layout_weight="0.05"
+        android:layout_height="fill_parent">
+    </LinearLayout>
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TableRow
 
-        <TableLayout
-            android:layout_width="0dip"
-            android:layout_weight="1"
-            android:layout_height="fill_parent">
-            <TableRow android:layout_width="0dip"
-                android:layout_weight="2"
-                android:layout_height="0dip">
-                <LinearLayout
-                    android:id="@+id/container_lobby"
-                    android:layout_width="0dip"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_height="fill_parent">
-                    </LinearLayout>
-            </TableRow>
-        </TableLayout>
-        <TableLayout
             android:layout_width="0dip"
             android:layout_weight="2"
-            android:layout_height="fill_parent">
-            <TableRow
-
-                android:layout_width="0dip"
+            android:layout_height="0dip">
+            <LinearLayout
+                android:id="@+id/container_detail"
+                android:layout_width="750dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_margin="5dip"
+                android:layout_height="140dp">
+            </LinearLayout>
+        </TableRow>
+        <TableRow
+            android:layout_width="0dip"
+            android:layout_weight="2"
+            android:layout_height="0dip">
+            <LinearLayout
+                android:id="@+id/container_meeting_room"
+                android:layout_width="210dp"
                 android:layout_weight="2"
-                android:layout_height="0dip">
-                <LinearLayout
-                    android:id="@+id/container_detail"
-                    android:layout_width="0dip"
-                    android:layout_weight="2"
-                    android:orientation="vertical"
-                    android:layout_margin="5dip"
-                    android:layout_height="140dp"
-                    android:background="#fff">
-                    </LinearLayout>
+                android:orientation="horizontal"
+                android:background="@drawable/abc_list_focused_holo"
+                android:layout_height="520dp"
+                android:layout_margin="5dip"/>
+            <LinearLayout/>
+        </TableRow>
+    </TableLayout>
 
-            </TableRow>
-            <TableRow
-                android:layout_width="0dip"
-                android:layout_weight="2"
-                android:layout_height="0dip">
-                <LinearLayout
-                    android:id="@+id/container_meeting_room"
-                    android:layout_width="1dip"
-                    android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/abc_list_focused_holo"
-                    android:layout_height="520dp"
-                    android:layout_margin="5dip"/>
-                    <LinearLayout/>
-
-            </TableRow>
-        </TableLayout>
-    </TableRow>
-</TableLayout>
+</LinearLayout>

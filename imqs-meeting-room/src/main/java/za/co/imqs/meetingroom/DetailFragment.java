@@ -60,6 +60,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         result = initiateButtons(result);
 
 
+
+
         return result;
     }
 
@@ -96,16 +98,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
     }
 
 
-    public View EndMeting(View view) {
-        final Button button = (Button) view.findViewById(R.id.EndMeeting);
+    public View EndMeting(View v) {
+        final Button button = (Button) v.findViewById(R.id.EndMeeting);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                listView = null;
+
                 My_auto_Cmplt_Tv.setText("");
-                meetingDetail.getStartTimeMin();
-                meetingDetail.getEndTimeMin();
-
-
             }
         });
         return button;
