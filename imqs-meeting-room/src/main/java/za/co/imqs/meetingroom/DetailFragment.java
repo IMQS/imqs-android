@@ -1,5 +1,6 @@
 package za.co.imqs.meetingroom;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
@@ -10,25 +11,26 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
+import java.util.Calendar;
+
 /**
  * This indicates the details of a meeting
  * @author donovan
  */
-public class DetailFragment extends Fragment implements View.OnClickListener{
-
-
+public class DetailFragment extends Fragment implements View.OnClickListener {
 
     MeetingDetail meetingDetail = null;
     MainActivity mainActivity = null;
-    GridView listView = null;
 
     public  int hour;
     public int minute;
 
-    public AutoCompleteTextView My_auto_Cmplt_Tv;
+    EndMeetingInterface endMeetingListener;
+
+    public AutoCompleteTextView meetingName;
 
 
     @Override
@@ -46,26 +48,34 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
 
         ArrayAdapter<String> My_arr_adapter= new ArrayAdapter<String>(getActivity(),
         R.layout.simple_dropdown_item_1line,MeetingNames);
-         My_auto_Cmplt_Tv=(AutoCompleteTextView)result.findViewById(R.id.autoNames);
+        meetingName =(AutoCompleteTextView)result.findViewById(R.id.autoNames);
 
-        My_auto_Cmplt_Tv.setThreshold(1);
-        My_auto_Cmplt_Tv.setAdapter(My_arr_adapter);
-        My_auto_Cmplt_Tv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+        meetingName.setThreshold(1);
+        meetingName.setAdapter(My_arr_adapter);
+        meetingName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
 
-         My_auto_Cmplt_Tv.getDropDownBackground();
+                meetingName.getDropDownBackground();
+
             }
         });
 
         result = initiateButtons(result);
-
-
-
-
         return result;
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            endMeetingListener = (EndMeetingInterface) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement EndMeetingInterface");
+        }
+    }
+
     public View initiateButtons(View view) {
+
         final View startTime;
         startTime = (View) view.findViewById(R.id.fragment_detail_start_time);
         final View endTime;
@@ -78,9 +88,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
             refreshStartTime(view, meetingDetail);
             refreshEndTime(view, meetingDetail);
         }
-        EndMeting(view);
 
+        endMeting(view);
        return view;
+
     }
 
     public View refreshStartTime(View parentView, MeetingDetail meetingDetail) {
@@ -97,19 +108,19 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
         return endTime;
     }
 
-
-    public View EndMeting(View v) {
-        final Button button = (Button) v.findViewById(R.id.EndMeeting);
+    public void endMeting(View v) {
+        final Button button = (Button) v.findViewById(R.id.endMeeting);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                My_auto_Cmplt_Tv.setText("");
+                meetingName.setText("");
+                TextView.setText(Calendar.HOUR_OF_DAY, 8);
+                meetingDetail.startTime.set(Calendar.MINUTE, 30);
+                meetingDetail.endTime.set(Calendar.HOUR_OF_DAY, 9);
+                meetingDetail.endTime.set(Calendar.MINUTE, 30);
+                endMeetingListener.endMeeting(v);
             }
         });
-        return button;
     }
-
-
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -209,6 +220,10 @@ public class DetailFragment extends Fragment implements View.OnClickListener{
             return String.valueOf(c);
         else
             return "0" + String.valueOf(c);
+    }
+
+    public interface EndMeetingInterface {
+        public void endMeeting(View v);
     }
 
  }

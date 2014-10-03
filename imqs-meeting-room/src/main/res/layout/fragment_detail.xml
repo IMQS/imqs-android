@@ -1,8 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
-
+    android:layout_height="match_parent">
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_detail_inner"
         android:layout_width="match_parent"
@@ -18,14 +17,14 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView android:id="@+id/fragment_detail_start_time_label"
-                android:text="@string/fragment_detail_start_time_label_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:textColor="#ffffffff" />
+            <!--<TextView android:id="@+id/fragment_detail_start_time_label"-->
+            <!--android:text="@string/fragment_detail_start_time_label_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="1dp"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="25sp"-->
+            <!--android:textColor="#ffffffff" />-->
             <TextView android:id="@+id/Test"
 
                 android:layout_width="wrap_content"
@@ -33,13 +32,13 @@
                 android:gravity="center"
                 android:textSize="25sp"
                 android:textColor="#ffffffff" />
-            <TextView android:id="@+id/fragment_detail_end_time_label"
-                android:text="@string/fragment_detail_end_time_label_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:textColor="#ffffffff" />
+            <!--<TextView android:id="@+id/fragment_detail_end_time_label"-->
+            <!--android:text="@string/fragment_detail_end_time_label_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:textSize="25sp"-->
+            <!--android:textColor="#ffffffff" />-->
         </TableRow>
         <TableRow
             android:layout_width="match_parent"
@@ -76,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="End Meeting"
-                android:id="@+id/EndMeeting"
+                android:id="@+id/endMeeting"
                 android:textColor="#FFFFFFFF"
                 android:layout_column="2" />
         </TableRow>
@@ -84,4 +83,5 @@
 
 
     </TableLayout>
-</RelativeLayout>
+
+</LinearLayout>

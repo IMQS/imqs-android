@@ -27,10 +27,6 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
         initialise(result);
         refreshView(getMainActivity().getLobby().getPeople());
         return result;
-
-
-
-
     }
 
 
@@ -51,11 +47,6 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
         listView = (ListView) parentView.findViewById(R.id.lobby_people);
         listView.setFastScrollAlwaysVisible(true);
         listView.setFastScrollEnabled(true);
-
-
-
-
-
     }
 
 

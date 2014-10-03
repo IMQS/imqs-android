@@ -1,6 +1,7 @@
 package za.co.imqs.meetingroom;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,10 +55,12 @@ public class PeopleAdaptor extends ArrayAdapter<Person> implements View.OnTouchL
         imageView.setImageResource(avatarId);
 
        TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
-        firstName.setText(person.firstName);
+       firstName.setText(person.firstName);
+       firstName.setTextColor(Color.BLUE);
 
         TextView lastName = (TextView) rowView.findViewById(R.id.lastName);
-       lastName.setText(person.lastName);
+        lastName.setText(person.lastName);
+        lastName.setTextColor(Color.BLUE);
 
 
         rowView.setTag(person);

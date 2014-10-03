@@ -2,6 +2,7 @@ package za.co.imqs.meetingroom;
 
 import android.app.Fragment;
 import android.content.ClipData;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -20,15 +22,21 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
 
     GridView listView = null;
     MainActivity mainActivity = null;
+    HashMap<Person, Integer> attendeeToIdMap = new HashMap<Person, Integer>();
+    Context context = null;
+    List<Person> persons;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View result = inflater.inflate(R.layout.fragment_attendees, container, false);
+
+        View  result = inflater.inflate(R.layout.fragment_attendees, container, false);
         initialise(result);
+
         mainActivity = (MainActivity)getActivity();
-
-
         return result;
+
     }
 
     private void initialise(View view) {
@@ -36,24 +44,30 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
         initialiseListView(view);
         refreshView(mainActivity.getMeetingRoom().getPeople());
 
+
     }
 
     private void initialiseListView(View parentView) {
         listView = (GridView) parentView.findViewById(R.id.meeting_room_people);
         listView.setEmptyView(getMainActivity().findViewById(R.id.room_empty));
 
+
+
     }
-    public View EndMeting(View view) {
-        final Button button = (Button) view.findViewById(R.id.EndMeeting);
+
+    public void endMeting(View v) {
+
+        final Button button = (Button) v.findViewById(R.id.endMeeting);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                listView.setVisibility(View.GONE);
-
+               listView.setAdapter(null);
+                listView.getAdapter();
             }
         });
-        return button;
+
     }
+
+
 
     public void initiateDragPerson(View view, Person person) {
         ClipData data = ClipData.newPlainText("person", Integer.toString(person.id));
@@ -91,8 +105,6 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
         return mainActivity;
     }
 
-
-
     public void refreshView(List<Person> people) {
         PeopleAdaptor adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee_white, people);
         adapter.setDragger(this);
@@ -103,7 +115,7 @@ public class MeetingRoomFragment extends Fragment implements PersonDragInterface
 	public void onPause() {
 		super.onPause();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();

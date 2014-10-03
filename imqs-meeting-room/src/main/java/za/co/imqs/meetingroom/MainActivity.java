@@ -5,16 +5,17 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
+import android.widget.GridView;
 
 import za.co.imqs.meetingroom.util.PeopleJsonReader;
 
-public class MainActivity extends Activity    {
+public class MainActivity extends Activity implements DetailFragment.EndMeetingInterface {
 
     private static Room meetingRoom = null;
     private static Room lobby = null;
-
-
-
+    public AutoCompleteTextView My_auto_Cmplt_Tv;
+    public GridView listView;
 
     public static DetailFragment detailFragment = null;
     public static MeetingRoomFragment meetingRoomFragment = null;
@@ -22,7 +23,6 @@ public class MainActivity extends Activity    {
     public static EnterFragment enterFragment = null;
     public static LobbyFragment lobbyFragment = null;
     public MainActivity mainActivity;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +34,15 @@ public class MainActivity extends Activity    {
         View meetingRoomContainer = fragmentContainer.findViewById(R.id.container_meeting_room);
         View lobbyContainer = fragmentContainer.findViewById(R.id.container_lobby);
 
-
-
         if (detailContainer != null && meetingRoomContainer != null && lobbyContainer != null ) {
             if (savedInstanceState != null)
                 return;
             addFragments(detailContainer.getId(), getDetailFragment());
             addFragments(meetingRoomContainer.getId(), getMeetingRoomFragment());
             addFragments(lobbyContainer.getId(), getLobbyFragment());
-
-
         }
 
         initialiseRooms();
-
     }
 
 
@@ -81,6 +76,7 @@ public class MainActivity extends Activity    {
         this.replaceFragment(R.id.container_detail, getDetailFragment());
     }
     public void displayMeetingRoomFragment() {
+
         this.replaceFragment(R.id.container_meeting_room, getMeetingRoomFragment());
     }
 
@@ -159,5 +155,8 @@ public class MainActivity extends Activity    {
         return null;
     }
 
-
+    @Override
+    public void endMeeting(View v) {
+        getMeetingRoomFragment().endMeting(v);
+    }
 }
