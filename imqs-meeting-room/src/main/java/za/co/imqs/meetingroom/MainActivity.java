@@ -5,8 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
-import android.widget.GridView;
 
 import za.co.imqs.meetingroom.util.PeopleJsonReader;
 
@@ -14,8 +12,7 @@ public class MainActivity extends Activity implements DetailFragment.EndMeetingI
 
     private static Room meetingRoom = null;
     private static Room lobby = null;
-    public AutoCompleteTextView My_auto_Cmplt_Tv;
-    public GridView listView;
+
 
     public static DetailFragment detailFragment = null;
     public static MeetingRoomFragment meetingRoomFragment = null;
@@ -158,5 +155,6 @@ public class MainActivity extends Activity implements DetailFragment.EndMeetingI
     @Override
     public void endMeeting(View v) {
         getMeetingRoomFragment().endMeting(v);
-    }
+        }
+
 }

@@ -9,9 +9,9 @@
     android:gravity="center_vertical|center_horizontal">
 
 
-    <ImageView
+    <TextView
         android:id="@+id/test_image"
-        android:src="@drawable/enter_right"
+        android:hint="drag names from left to right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true" />

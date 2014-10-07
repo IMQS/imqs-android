@@ -29,13 +29,12 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
         return result;
     }
 
-
     /**
      * Singleton Accessor
      */
     public MainActivity getMainActivity() {
         if (mainActivity == null)
-            mainActivity = (MainActivity)getActivity();
+            mainActivity = (MainActivity) getActivity();
         return mainActivity;
     }
 
@@ -47,10 +46,12 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
         listView = (ListView) parentView.findViewById(R.id.lobby_people);
         listView.setFastScrollAlwaysVisible(true);
         listView.setFastScrollEnabled(true);
+        listView.setScrollBarSize(1000);
+        listView.setVerticalScrollBarEnabled(true);
     }
 
 
-    public void initiateDragPerson(View view, Person person) {
+    public void initiateDragPerson(View view, final Person person) {
         ClipData data = ClipData.newPlainText("person", Integer.toString(person.id));
         View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
         view.setOnDragListener(new View.OnDragListener() {
@@ -65,9 +66,11 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
                         return true;
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {
-                            mainActivity.displayMeetingRoomFragment();
-                            mainActivity.displayLobbyFragment();
-                            return true;
+                        mainActivity.displayMeetingRoomFragment();
+                        mainActivity.displayLobbyFragment();
+
+
+                        return true;
                     }
                 }
                 return false;
@@ -78,12 +81,12 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
 
 
     public void refreshView(List<Person> people) {
-        PeopleAdaptor adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee_white, people);
+        PeopleAdaptor adapter = new PeopleAdaptor(getMainActivity(), R.layout.row_attendee_black, people);
         adapter.setDragger(this);
         listView.setAdapter(adapter);
 
-    }
 
+    }
 
 
 

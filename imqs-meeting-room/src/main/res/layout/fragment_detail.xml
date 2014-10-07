@@ -12,7 +12,11 @@
         <AutoCompleteTextView
             android:id="@+id/autoNames"
             android:layout_width="400dp"
-            android:hint="Please Select Meeting"
+            android:hint="Please enter meeting name"
+            android:textColorHint="#FFFFFFFF"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="#FFFFFFFF"
             android:layout_height="wrap_content"/>
         <TableRow
             android:layout_width="match_parent"

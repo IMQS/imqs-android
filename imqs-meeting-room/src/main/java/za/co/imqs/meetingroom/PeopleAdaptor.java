@@ -3,12 +3,13 @@ package za.co.imqs.meetingroom;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.view.MotionEvent;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,68 +38,70 @@ public class PeopleAdaptor extends ArrayAdapter<Person> implements View.OnTouchL
         this.context = context;
         for (int i = 0; i < persons.size(); ++i)
             attendeeToIdMap.put(persons.get(i), i);
-        this.persons = persons;
-    }
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        Person person = persons.get(position);
-        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        int parentId = parent.getId();
-        int idToInflate = parentId == R.id.lobby_people ? R.layout.row_attendee_black : R.layout.row_attendee_white;
-        View rowView = inflater.inflate(idToInflate, parent, false);
-
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.avatar);
-        int avatarId = context.getResources().getIdentifier(person.avatarPath, "drawable", context.getPackageName());
-        imageView.setImageResource(avatarId);
-
-       TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
-       firstName.setText(person.firstName);
-       firstName.setTextColor(Color.BLUE);
-
-        TextView lastName = (TextView) rowView.findViewById(R.id.lastName);
-        lastName.setText(person.lastName);
-        lastName.setTextColor(Color.BLUE);
-
-
-        rowView.setTag(person);
-        rowView.setOnTouchListener(this);
-
-
-        return rowView;
-    }
-
-
-
-    public  boolean onTouch(View rowView, MotionEvent motionEvent) {
-        switch(motionEvent.getAction()) {
-            case MotionEvent.ACTION_MOVE: {
-                dragger.initiateDragPerson(rowView, (Person) rowView.getTag());
-                break;
+                this.persons = persons;
             }
-        }
-        return true;
-    }
 
-    @Override
-    public long getItemId(int position) {
-        Person item = getItem(position);
-        return attendeeToIdMap.get(item);
-    }
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
 
-    @Override
-    public boolean hasStableIds() {
-        return true;
-    }
+                Person person = persons.get(position);
+                LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-    public PersonDragInterface getDragger() {
-        return dragger;
-    }
+                int parentId = parent.getId();
+                int idToInflate = parentId == R.id.lobby_people ? R.layout.row_attendee_black : R.layout.row_attendee_white;
+                View rowView = inflater.inflate(idToInflate, parent, false);
 
-    public void setDragger(PersonDragInterface dragger) {
-        this.dragger = dragger;
-    }
+                ImageView imageView = (ImageView) rowView.findViewById(R.id.avatar);
+                int avatarId = context.getResources().getIdentifier(person.avatarPath, "drawable", context.getPackageName());
+                imageView.setImageResource(avatarId);
 
-}
+                TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
+                firstName.setText(person.firstName);
+                firstName.setTextColor(Color.BLUE);
+
+                TextView lastName = (TextView) rowView.findViewById(R.id.lastName);
+                lastName.setText(person.lastName);
+                lastName.setTextColor(Color.BLUE);
+
+
+                rowView.setTag(person);
+                rowView.setOnTouchListener(this);
+
+
+
+                return rowView;
+            }
+
+
+            public boolean onTouch(View rowView, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_MOVE: {
+                        dragger.initiateDragPerson(rowView, (Person) rowView.getTag());
+                        break;
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            public long getItemId(int position) {
+                Person item = getItem(position);
+                return attendeeToIdMap.get(item);
+            }
+
+            @Override
+            public boolean hasStableIds() {
+                return true;
+            }
+
+            public PersonDragInterface getDragger() {
+                return dragger;
+            }
+
+            public void setDragger(PersonDragInterface dragger) {
+                this.dragger = dragger;
+            }
+
+
+ }

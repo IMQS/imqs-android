@@ -11,10 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
-import java.util.Calendar;
 
 /**
  * This indicates the details of a meeting
@@ -27,9 +26,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
     public  int hour;
     public int minute;
+    ListView listView = null;
 
     EndMeetingInterface endMeetingListener;
-
     public AutoCompleteTextView meetingName;
 
 
@@ -113,11 +112,9 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 meetingName.setText("");
-                TextView.setText(Calendar.HOUR_OF_DAY, 8);
-                meetingDetail.startTime.set(Calendar.MINUTE, 30);
-                meetingDetail.endTime.set(Calendar.HOUR_OF_DAY, 9);
-                meetingDetail.endTime.set(Calendar.MINUTE, 30);
+
                 endMeetingListener.endMeeting(v);
+
             }
         });
     }
@@ -130,33 +127,23 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStop() {
         super.onStop();
-        meetingDetail.getStartTimeMin();
-        meetingDetail.getEndTimeMin();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        meetingDetail.getStartTimeMin();
-        meetingDetail.getEndTimeMin();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        meetingDetail.getStartTimeMin();
-        meetingDetail.getEndTimeMin();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        meetingDetail.getStartTimeMin();
-        meetingDetail.getEndTimeMin();
     }
     public void onRestart(){
-        meetingDetail.getStartTimeMin();
-        meetingDetail.getEndTimeMin();
     }
 
     @Override
