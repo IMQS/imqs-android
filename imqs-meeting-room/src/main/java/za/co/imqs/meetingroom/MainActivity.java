@@ -153,8 +153,8 @@ public class MainActivity extends Activity implements DetailFragment.EndMeetingI
     }
 
     @Override
-    public void endMeeting(View v) {
-        getMeetingRoomFragment().endMeting(v);
+    public void endMeeting(View view) {
+        getMeetingRoomFragment().endMeting(view);
         }
 
 }

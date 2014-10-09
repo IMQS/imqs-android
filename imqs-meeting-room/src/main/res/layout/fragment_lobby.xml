@@ -4,15 +4,9 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/fragment_lobby"
-    android:background="@color/imqs_blue"
     android:orientation="vertical">
-
     <ListView
         android:id="@+id/lobby_people"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"/>
-
-
-
-
 </LinearLayout>

@@ -4,18 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/imqs_blue"
     android:layout_toEndOf="@+id/lobby_people"
     android:gravity="center_vertical|center_horizontal">
-
-
-    <TextView
-        android:id="@+id/test_image"
-        android:hint="drag names from left to right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true" />
-
     <ListView
         android:id="@+id/meeting_room_people"
         android:layout_height="wrap_content"

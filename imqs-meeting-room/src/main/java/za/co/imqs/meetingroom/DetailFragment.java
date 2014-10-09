@@ -10,8 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -26,12 +25,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
     public  int hour;
     public int minute;
-    ListView listView = null;
-
     EndMeetingInterface endMeetingListener;
     public AutoCompleteTextView meetingName;
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,8 +42,8 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
         ArrayAdapter<String> My_arr_adapter= new ArrayAdapter<String>(getActivity(),
         R.layout.simple_dropdown_item_1line,MeetingNames);
-        meetingName =(AutoCompleteTextView)result.findViewById(R.id.autoNames);
-
+        meetingName =(AutoCompleteTextView)result.findViewById(R.id.meetNames);
+        meetingName.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         meetingName.setThreshold(1);
         meetingName.setAdapter(My_arr_adapter);
         meetingName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -108,13 +103,12 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
     }
 
     public void endMeting(View v) {
-        final Button button = (Button) v.findViewById(R.id.endMeeting);
+        final ImageView button = (ImageView) v.findViewById(R.id.closeMetting);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 meetingName.setText("");
-
                 endMeetingListener.endMeeting(v);
-
+                mainActivity.getMeetingRoom().getPeople().clear();
             }
         });
     }
@@ -151,7 +145,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.fragment_detail_start_time: { onClickStartTime(view, meetingDetail); return;}
             case R.id.fragment_detail_end_time: { onClickEndTime(view, meetingDetail); return;}
-
         }
     }
 
@@ -177,7 +170,6 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
         dialog.show();
         return view;
     }
-
 
     /**
      * Opens the End Time Dialog

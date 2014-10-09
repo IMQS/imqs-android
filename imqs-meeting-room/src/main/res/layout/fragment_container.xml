@@ -15,9 +15,7 @@
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <TableRow
-
-            >
+        <TableRow>
             <LinearLayout
                 android:id="@+id/container_detail"
                 android:layout_width="750dp"
@@ -27,8 +25,7 @@
                 android:layout_height="140dp">
             </LinearLayout>
         </TableRow>
-        <TableRow
-            >
+        <TableRow>
             <LinearLayout
                 android:id="@+id/container_meeting_room"
                 android:layout_width="310dp"
@@ -40,5 +37,4 @@
             <LinearLayout/>
         </TableRow>
     </TableLayout>
-
 </LinearLayout>

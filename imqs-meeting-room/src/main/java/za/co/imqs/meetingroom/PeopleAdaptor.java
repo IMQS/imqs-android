@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,10 +40,15 @@ public class PeopleAdaptor extends ArrayAdapter<Person> implements View.OnTouchL
         this.context = context;
         for (int i = 0; i < persons.size(); ++i)
             attendeeToIdMap.put(persons.get(i), i);
+        Collections.sort(persons, new Comparator<Person>() {
+            @Override
+            public int compare(Person person, Person person2) {
+                return person.getFirstName().compareTo(person2.getFirstName());
 
-                this.persons = persons;
             }
+        });this.persons = persons;
 
+            }
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -58,22 +65,14 @@ public class PeopleAdaptor extends ArrayAdapter<Person> implements View.OnTouchL
 
                 TextView firstName = (TextView) rowView.findViewById(R.id.firstName);
                 firstName.setText(person.firstName);
-                firstName.setTextColor(Color.BLUE);
-
                 TextView lastName = (TextView) rowView.findViewById(R.id.lastName);
                 lastName.setText(person.lastName);
+                firstName.setTextColor(Color.BLUE);
                 lastName.setTextColor(Color.BLUE);
-
-
                 rowView.setTag(person);
                 rowView.setOnTouchListener(this);
-
-
-
                 return rowView;
             }
-
-
             public boolean onTouch(View rowView, MotionEvent motionEvent) {
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_MOVE: {
@@ -83,7 +82,6 @@ public class PeopleAdaptor extends ArrayAdapter<Person> implements View.OnTouchL
                 }
                 return true;
             }
-
             @Override
             public long getItemId(int position) {
                 Person item = getItem(position);
@@ -102,6 +100,4 @@ public class PeopleAdaptor extends ArrayAdapter<Person> implements View.OnTouchL
             public void setDragger(PersonDragInterface dragger) {
                 this.dragger = dragger;
             }
-
-
- }
+  }

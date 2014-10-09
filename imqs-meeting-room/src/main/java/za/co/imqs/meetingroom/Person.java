@@ -5,16 +5,10 @@ package za.co.imqs.meetingroom;
  * Created by donovan on 2014/08/10.
  */
 public class Person {
-
     int id;
     String firstName;
     String lastName;
     String avatarPath;
-
-    private boolean isGroupheader = false;
-
-
-
     public Person(int id, String firstName, String lastName, String avatarPath) {
         super();
         this.id = id;
@@ -34,6 +28,4 @@ public class Person {
     public boolean equals(Object person) {
         return person instanceof Person && ((Person)person).id == this.id;
     }
-
-
 }

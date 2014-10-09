@@ -5,7 +5,4 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     tools:context="za.co.imqs.meetingroom.MainActivity">
-
-
-
 </LinearLayout>

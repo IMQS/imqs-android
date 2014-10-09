@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
+import android.widget.Toast;
 import java.util.List;
 
 /**
@@ -46,8 +46,8 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
         listView = (ListView) parentView.findViewById(R.id.lobby_people);
         listView.setFastScrollAlwaysVisible(true);
         listView.setFastScrollEnabled(true);
-        listView.setScrollBarSize(1000);
         listView.setVerticalScrollBarEnabled(true);
+        listView.setBackgroundColor(getResources().getColor(android.R.color.white));
     }
 
 
@@ -60,9 +60,10 @@ public class LobbyFragment extends Fragment implements PersonDragInterface {
                 switch (dragEvent.getAction()) {
                     case DragEvent.ACTION_DRAG_STARTED: {
                         mainActivity.displayEnterFragment();
+                        Toast.makeText(getActivity().getApplicationContext(), "Drag names from left to right",
+                                Toast.LENGTH_SHORT).show();
                         View dropzone = mainActivity.findViewById(R.id.container_meeting_room);
                         dropzone.setOnDragListener(new EnterFragmentListener(mainActivity));
-
                         return true;
                     }
                     case DragEvent.ACTION_DRAG_ENDED: {

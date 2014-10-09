@@ -25,7 +25,6 @@ import za.co.imqs.meetingroom.R;
  * Created by donovan on 2014/08/12.
  */
 
-
 /**
  * Reads the people from the Json
  * Created by donovan on 2014/08/12.
@@ -48,8 +47,6 @@ public class PeopleJsonReader implements PeopleReaderInterface {
         }
         return json;
     }
-
-
 
     @Override
     public List<Person> getPeople(Activity context) {
@@ -78,8 +75,6 @@ public class PeopleJsonReader implements PeopleReaderInterface {
         }
         return result;
     }
-
-
 
     private Person readNextAttendee(JSONObject attendee) throws Exception {
         return new Person(attendee.getInt("i"), attendee.getString("f"), attendee.getString("l"), attendee.getString("p"));

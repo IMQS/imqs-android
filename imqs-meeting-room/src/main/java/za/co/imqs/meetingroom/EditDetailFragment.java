@@ -21,7 +21,6 @@ public class EditDetailFragment extends Fragment implements View.OnClickListener
     public void saveEditDetail() {
         //Nothing
     }
-
     @Override
     public void onClick(View view) {
 

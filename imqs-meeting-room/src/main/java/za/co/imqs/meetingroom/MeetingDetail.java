@@ -72,7 +72,6 @@ public class MeetingDetail {
         return calendar;
     }
 
-
     /* --- Getters and Setters --- */
 
     public String getDescription() {
@@ -82,6 +81,4 @@ public class MeetingDetail {
     public void setDescription(String description) {
         this.description = description;
     }
-
-
 }
