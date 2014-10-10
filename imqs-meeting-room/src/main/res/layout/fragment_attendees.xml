@@ -6,6 +6,7 @@
     android:background="@drawable/abc_ab_share_pack_holo_light"
     android:orientation="horizontal"
     android:id="@+id/fragment_meeting_room">
+
     <GridView
         android:id="@+id/meeting_room_people"
         android:layout_width="match_parent"

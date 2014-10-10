@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.support.v7.internal.view.ActionBarPolicy;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class DetailFragment extends Fragment implements View.OnClickListener {
 
         mainActivity = (MainActivity)getActivity();
         meetingDetail = MeetingDetail.getMeetingDetail();
+        ActionBarPolicy.get(mainActivity.getApplicationContext()).showsOverflowMenuButton();
 
         View result = inflater.inflate(R.layout.fragment_detail, container, false);
         result.setBackgroundColor(getResources().getColor(R.color.imqs_blue));
