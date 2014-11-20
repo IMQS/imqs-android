@@ -1,0 +1,5 @@
+INDEX VERSION 1.126+C:\projects\imqs-android-2\.metadata\.plugins\org.eclipse.jdt.core
+1284074322.index
+1207691043.index
+3498483863.index
+1764246917.index
