@@ -4,8 +4,6 @@ import android.content.ClipData;
 import android.view.DragEvent;
 import android.view.View;
 
-import java.util.List;
-
 /**
  * Created by donovan on 2014/08/13.
  */
@@ -17,6 +15,8 @@ public class EnterFragmentListener implements View.OnDragListener {
         this.mainActivity = mainActivity;
     }
 
+
+
     @Override
     public boolean onDrag(View view, DragEvent dragEvent) {
         switch (dragEvent.getAction()) {
@@ -26,7 +26,8 @@ public class EnterFragmentListener implements View.OnDragListener {
                 mainActivity.getLobby().personExitTo(person, mainActivity.getMeetingRoom());
                 mainActivity.getMeetingRoomFragment().refreshView(mainActivity.getMeetingRoom().getPeople());
                 mainActivity.getLobbyFragment().refreshView(mainActivity.getLobby().getPeople());
-            }
+
+               }
         }
         return true;
     }

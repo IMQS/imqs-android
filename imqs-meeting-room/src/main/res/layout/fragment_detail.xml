@@ -1,43 +1,35 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
->
+    android:layout_height="match_parent">
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/fragment_detail_inner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:stretchColumns="*"
-        android:gravity="center_vertical"
-        android:background="@color/imqs_blue"
-        android:baselineAligned="false"
-        android:paddingBottom="100dp">
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView android:id="@+id/fragment_detail_start_time_label"
-                android:text="@string/fragment_detail_start_time_label_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:textColor="#ffffffff" />
-
-            <TextView android:id="@+id/fragment_detail_end_time_label"
-                android:text="@string/fragment_detail_end_time_label_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="25sp"
-                android:textColor="#ffffffff" />
+        android:background="@color/imqs_blue">
+        <TableRow>
+        <AutoCompleteTextView
+            android:id="@+id/meetNames"
+            android:layout_width="wrap_content"
+            android:hint="Please enter meeting name"
+            android:textColorHint="#FFFFFFFF"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textColor="#FFFFFFFF"
+            android:layout_height="wrap_content"
+            android:layout_gravity="clip_vertical"
+            android:layout_span="9" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/closeMetting"
+            android:src="@drawable/closemeeting"
+            android:layout_gravity="right"
+            android:layout_column="2" ></ImageView>
         </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
+        <TableRow>
             <TextView android:id="@+id/fragment_detail_start_time"
                 android:hint="@string/fragment_detail_start_time_hint"
                 android:text="@string/fragment_detail_start_time_text"
@@ -47,33 +39,24 @@
                 android:gravity="center"
                 android:textSize="35sp"
                 android:textColor="#FFFFFFFF" />
-
-            <TextView android:id="@+id/fragment_detail_end_time"
-                android:hint="@string/fragment_detail_end_time_hint"
-                android:text="@string/fragment_detail_end_time_text"
+            <TextView android:id="@+id/to"
+                android:hint="@string/fragment_detail_start_time_hint"
+                android:text="to"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:gravity="center"
                 android:textSize="35sp"
                 android:textColor="#FFFFFFFF" />
+            <TextView android:id="@+id/fragment_detail_end_time"
+                android:hint="@string/fragment_detail_end_time_hint"
+                android:text="@string/fragment_detail_end_time_text"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:gravity="left"
+                android:textSize="35sp"
+                android:textColor="#FFFFFFFF" />
         </TableRow>
-
-
     </TableLayout>
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="@string/fragment_detail_button_text"
-        android:id="@+id/add_people_button"
-        android:layout_alignBottom="@+id/fragment_detail_inner"
-        android:focusable="true"
-        android:src="@drawable/plus_white"
-        android:layout_centerHorizontal="true"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/fragment_meeting_room_button_text"
-        android:layout_alignParentBottom="false"
-        android:layout_marginBottom="100dp" />
-
-</RelativeLayout>
+</LinearLayout>
